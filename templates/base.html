@@ -1,59 +1,47 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="nl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <!-- Primary Meta Tags -->
+
     <title>{% block title %}Erik Walther — Software Developer{% endblock %}</title>
-    <meta name="title" content="{% block meta_title %}{{ block.super }}{% endblock %}">
-    <meta name="description" content="{% block meta_description %}Software developer gespecialiseerd in Django, Python en web security. Bekijk mijn projecten en expertise.{% endblock %}">
-    <meta name="keywords" content="{% block meta_keywords %}django, python, software developer, web security, portfolio{% endblock %}">
+    <meta name="description" content="{% block meta_description %}Software developer gespecialiseerd in Django, Python en web security.{% endblock %}">
+    <meta name="keywords" content="{% block meta_keywords %}django, python, software developer, web security{% endblock %}">
     <meta name="author" content="Erik Walther">
-    <meta name="robots" content="{% block meta_robots %}index, follow{% endblock %}">
-    
-    <!-- Canonical URL -->
-    <link rel="canonical" href="{% block canonical_url %}https://erikwalther.eu{% endblock %}">
-    
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="{% block og_type %}website{% endblock %}">
-    <meta property="og:url" content="{% block og_url %}https://erikwalther.eu{% endblock %}">
-    <meta property="og:title" content="{% block og_title %}{% block title %}{% endblock %}{% endblock %}">
-    <meta property="og:description" content="{% block og_description %}{% block meta_description %}{% endblock %}{% endblock %}">
+    <meta name="robots" content="index, follow">
+
+    <link rel="canonical" href="https://erikwalther.eu">
+
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://erikwalther.eu">
+    <meta property="og:title" content="{% block og_title %}Erik Walther — Software Developer{% endblock %}">
+    <meta property="og:description" content="{% block og_description %}Software developer gespecialiseerd in Django, Python en web security.{% endblock %}">
     <meta property="og:image" content="{% block og_image %}{% static 'images/og-image.jpg' %}{% endblock %}">
     <meta property="og:locale" content="nl_NL">
     <meta property="og:site_name" content="Erik Walther">
-    
-    <!-- Twitter Card -->
-    <meta name="twitter:card" content="{% block twitter_card %}summary_large_image{% endblock %}">
-    <meta name="twitter:url" content="{% block twitter_url %}https://erikwalther.eu{% endblock %}">
-    <meta name="twitter:title" content="{% block twitter_title %}{% block title %}{% endblock %}{% endblock %}">
-    <meta name="twitter:description" content="{% block twitter_description %}{% block meta_description %}{% endblock %}{% endblock %}">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://erikwalther.eu">
+    <meta name="twitter:title" content="{% block twitter_title %}Erik Walther — Software Developer{% endblock %}">
+    <meta name="twitter:description" content="{% block twitter_description %}Software developer gespecialiseerd in Django, Python en web security.{% endblock %}">
     <meta name="twitter:image" content="{% block twitter_image %}{% static 'images/twitter-card.jpg' %}{% endblock %}">
-    
-    <!-- Favicon -->
+
     <link rel="icon" type="image/png" sizes="32x32" href="{% static 'favicon/favicon-32x32.png' %}">
     <link rel="icon" type="image/png" sizes="16x16" href="{% static 'favicon/favicon-16x16.png' %}">
     <link rel="apple-touch-icon" sizes="180x180" href="{% static 'favicon/apple-touch-icon.png' %}">
-    <link rel="manifest" href="{% static 'favicon/site.webmanifest' %}">
-    
-    <!-- Stylesheets -->
+
     <link href="{% static 'css/main.css' %}" rel="stylesheet">
-    
-    <!-- Preload critical assets -->
-    <link rel="preload" href="{% static 'css/main.css' %}" as="style">
-    
-    {% block extra_head %}{% endblock %}
 </head>
 <body>
-    <!-- Skip to content for accessibility -->
     <a href="#main-content" class="skip-link">Skip to main content</a>
-    
+
     <header>
         <div class="container nav">
             <a href="/" class="nav-brand">Erik Walther</a>
             <nav aria-label="Main navigation">
                 <ul class="nav-links">
+                    <li><a href="/">Home</a></li>
                     <li><a href="/projects/">Projects</a></li>
                     <li><a href="/about/">About</a></li>
                     <li><a href="/contact/">Contact</a></li>
@@ -61,34 +49,24 @@
             </nav>
         </div>
     </header>
-    
+
     <main id="main-content">
         {% block content %}{% endblock %}
     </main>
-    
+
     <footer>
         <div class="container">
             <p>&copy; 2026 Erik Walther. Built with Django.</p>
         </div>
     </footer>
-    
-    {% block extra_js %}{% endblock %}
-    <!-- Structured Data -->
+
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
         "@type": "Person",
         "name": "Erik Walther",
         "url": "https://erikwalther.eu",
-        "sameAs": [
-            "https://github.com/erikwalther",
-            "https://linkedin.com/in/erikwalther"
-        ],
-        "jobTitle": "Software Developer",
-        "worksFor": {
-            "@type": "Organization",
-            "name": "Freelance"
-        }
+        "jobTitle": "Software Developer"
     }
     </script>
 

@@ -33,7 +33,7 @@ class ProjectPage(models.Model):
     title = models.CharField(max_length=200, verbose_name="Pagina Titel")
     slug = models.SlugField(verbose_name="Pagina Slug")
     content_markdown = models.TextField(help_text="Schrijf hier je content in Markdown", verbose_name="Content (Markdown)")
-    content_html = models.TextField(editable=False, verbose_name="Content (HTML)") # Gecached HTML
+    content_html = models.TextField(editable=False, verbose_name="Content (HTML)")
     order = models.IntegerField(default=0, verbose_name="Volgorde")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -47,14 +47,12 @@ class ProjectPage(models.Model):
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = slugify(self.title)
-        
-        # Render Markdown
+
         md = markdown.markdown(
             self.content_markdown,
             extensions=['fenced_code', 'codehilite', 'toc', 'tables', 'nl2br']
         )
-        
-        # Sanitize HTML voor XSS beveiliging
+
         allowed_tags = [
             'p', 'br', 'strong', 'em', 'u', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6',
             'ul', 'ol', 'li', 'blockquote', 'pre', 'code', 'a', 'img', 'hr',
@@ -65,9 +63,8 @@ class ProjectPage(models.Model):
             'a': ['href', 'title', 'target'],
             'img': ['src', 'alt', 'title']
         }
-        
+
         self.content_html = bleach.clean(md, tags=allowed_tags, attributes=allowed_attrs, strip=True)
-        
         super().save(*args, **kwargs)
 
     def __str__(self):

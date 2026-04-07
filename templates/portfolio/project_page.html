@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ page.title }} — {{ project.title }}{% endblock %}
+{% block meta_description %}{{ page.content_markdown|striptags|truncatewords:150 }}{% endblock %}
+
+{% block content %}
+<article class="markdown-content">
+    <nav style="margin-bottom: 2rem;">
+        <a href="/" style="color: var(--text-muted);">Home</a> |
+        <a href="/projects/" style="color: var(--text-muted);">Projects</a> |
+        <a href="{% url 'portfolio:project_detail' project.slug %}" style="color: var(--text-muted);">{{ project.title }}</a>
+    </nav>
+
+    <h1>{{ page.title }}</h1>
+    <p style="color: var(--text-muted); font-size: 0.875rem; margin-bottom: 2rem;">
+        Updated: {{ page.updated_at|date:"d M Y" }}
+    </p>
+
+    <div>{{ page.content_html|safe }}</div>
+</article>
+
+<nav style="margin-top: 3rem; display: flex; justify-content: space-between;">
+    {% if previous_page %}
+    <a href="{% url 'portfolio:project_page' project.slug previous_page.slug %}" class="btn btn-outline">← {{ previous_page.title }}</a>
+    {% endif %}
+
+    {% if next_page %}
+    <a href="{% url 'portfolio:project_page' project.slug next_page.slug %}" class="btn btn-outline">{{ next_page.title }} →</a>
+    {% endif %}
+</nav>
+{% endblock %}
+
+{% block structured_data %}
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "CreativeWork",
+    "headline": "{{ page.title }}",
+    "description": "{{ project.description|escapejs }}",
+    "author": {
+        "@type": "Person",
+        "name": "Erik Walther"
+    },
+    "datePublished": "{{ project.created_at|date:'Y-m-d' }}",
+    "dateModified": "{{ page.updated_at|date:'Y-m-d' }}",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://erikwalther.eu{{ request.get_full_path }}"
+    },
+    "publisher": {
+        "@type": "Person",
+        "name": "Erik Walther",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "https://erikwalther.eu/static/images/logo.png"
+        }
+    }
+}
+</script>
+{% endblock %}

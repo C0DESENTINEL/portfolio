@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %}Projects — Erik Walther{% endblock %}
+{% block meta_description %}Bekijk mijn projecten en experimenten. Django, Python, web security en meer.{% endblock %}
+
+{% block content %}
+<h1>Projects</h1>
+<p>Selected work and experiments.</p>
+
+<div class="projects-grid">
+    {% for project in projects %}
+    <article class="card">
+        <h2 class="card-title">
+            <a href="{% url 'portfolio:project_detail' project.slug %}">{{ project.title }}</a>
+        </h2>
+        <div class="card-meta">
+            {{ project.created_at|date:"d M Y" }}
+        </div>
+        <p>{{ project.description|truncatewords:30 }}</p>
+        <a href="{% url 'portfolio:project_detail' project.slug %}" class="btn btn-outline">Read more</a>
+    </article>
+    {% empty %}
+    <p>No projects yet.</p>
+    {% endfor %}
+</div>
+{% endblock %}
