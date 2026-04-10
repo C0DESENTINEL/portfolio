@@ -5,24 +5,25 @@
 
 {% block content %}
 <article>
-    <nav style="margin-bottom: 2rem;">
-        <a href="/" style="color: var(--text-muted);">← Home</a> |
-        <a href="/projects/" style="color: var(--text-muted);">Projects</a>
+    <!-- Navigatie -->
+    <nav>
+        <a href="/" class="nav-link">← Home</a> |
+        <a href="/projects/" class="nav-link">Projects</a>
     </nav>
 
     <h1>{{ project.title }}</h1>
-    <p style="color: var(--text-muted); font-size: 0.875rem; margin-bottom: 1rem;">
+    <p class="meta-info">
         Created: {{ project.created_at|date:"d M Y" }} | Updated: {{ project.updated_at|date:"d M Y" }}
     </p>
 
     {% if project.featured_image %}
-    <img src="{{ project.featured_image.url }}" alt="{{ project.title }}" style="border-radius: var(--radius); margin-bottom: 1.5rem;">
+    <img src="{{ project.featured_image.url }}" alt="{{ project.title }}" class="featured-image">
     {% endif %}
 
     <p>{{ project.description }}</p>
 
     {% if project.github_url or project.live_url %}
-    <div style="margin-top: 1.5rem;">
+    <div class="article-actions">
         {% if project.github_url %}
         <a href="{{ project.github_url }}" class="btn btn-outline" target="_blank" rel="noopener noreferrer">GitHub</a>
         {% endif %}
@@ -33,21 +34,22 @@
     {% endif %}
 
     {% if project.tags %}
-    <div style="margin-top: 1.5rem;">
+    <div class="article-tags">
         {% for tag in project.tags %}
-        <span style="background: var(--bg-tertiary); padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.875rem;">{{ tag }}</span>
+        <span class="tag-badge">{{ tag }}</span>
         {% endfor %}
     </div>
     {% endif %}
 </article>
 
-<hr style="margin: 2rem 0; border: none; border-top: 1px solid var(--border);">
+<!-- Divider -->
+<hr class="content-divider">
 
-<section>
+<section class="project-pages-section">
     <h2>Pagina's</h2>
-    <ul style="list-style: none; padding: 0;">
+    <ul class="project-pages-list">
         {% for page in project.pages.all %}
-        <li style="margin-bottom: 0.5rem;">
+        <li>
             <a href="{% url 'portfolio:project_page' project.slug page.slug %}">{{ page.title }}</a>
         </li>
         {% empty %}

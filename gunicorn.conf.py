@@ -1,6 +1,9 @@
 import multiprocessing
+import os
 
-bind = "127.0.0.1:8080"
+os.environ.setdefault('TMPDIR', '/var/tmp')
+
+bind = "unix:/run/gunicorn/gunicorn.sock"
 workers = 2
 worker_class = "sync"
 worker_connections = 1000
@@ -20,4 +23,4 @@ limit_request_fields = 100
 limit_request_field_size = 8190
 forwarded_allow_ips = "127.0.0.1"
 
-
+umask = 0o007

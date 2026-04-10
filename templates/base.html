@@ -12,26 +12,32 @@
     <meta name="robots" content="index, follow">
 
     <link rel="canonical" href="https://erikwalther.eu">
-
+    
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://erikwalther.eu">
     <meta property="og:title" content="{% block og_title %}Erik Walther — Software Developer{% endblock %}">
     <meta property="og:description" content="{% block og_description %}Software developer gespecialiseerd in Django, Python en web security.{% endblock %}">
-    <meta property="og:image" content="{% block og_image %}{% static 'images/og-image.jpg' %}{% endblock %}">
     <meta property="og:locale" content="nl_NL">
     <meta property="og:site_name" content="Erik Walther">
 
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:url" content="https://erikwalther.eu">
-    <meta name="twitter:title" content="{% block twitter_title %}Erik Walther — Software Developer{% endblock %}">
-    <meta name="twitter:description" content="{% block twitter_description %}Software developer gespecialiseerd in Django, Python en web security.{% endblock %}">
-    <meta name="twitter:image" content="{% block twitter_image %}{% static 'images/twitter-card.jpg' %}{% endblock %}">
-
-    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'favicon/favicon-32x32.png' %}">
-    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'favicon/favicon-16x16.png' %}">
-    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'favicon/apple-touch-icon.png' %}">
-
     <link href="{% static 'css/main.css' %}" rel="stylesheet">
+
+    <link rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/" />
+    <meta property="cc:license" content="https://creativecommons.org/licenses/by-sa/4.0/" xmlns:cc="http://creativecommons.org/ns#" />
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "url": "https://erikwalther.eu/",
+      "copyrightHolder": {
+        "@type": "Person",
+        "name": "Erik Walther"
+      },
+      "license": "https://creativecommons.org/licenses/by-sa/4.0/"
+    }
+    </script>
+
 </head>
 <body>
     <a href="#main-content" class="skip-link">Skip to main content</a>
@@ -55,9 +61,15 @@
     </main>
 
     <footer>
-        <div class="container">
-            <p>&copy; 2026 Erik Walther. Built with Django.</p>
-        </div>
+      <div class="container">
+        <p>
+          &copy; {% now "Y" %} Erik Walther. 
+          Alle inhoud op deze site is gelicentieerd onder een 
+          <a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/">
+            Creative Commons Attribution-ShareAlike 4.0 International License
+          </a>.
+        </p>
+      </div>
     </footer>
 
     <script type="application/ld+json">

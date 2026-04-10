@@ -5,7 +5,7 @@
 
 {% block content %}
 <h1>Projects</h1>
-<p>Selected work and experiments.</p>
+<p class="intro-text">Selected work and experiments.</p>
 
 <div class="projects-grid">
     {% for project in projects %}
@@ -16,11 +16,11 @@
         <div class="card-meta">
             {{ project.created_at|date:"d M Y" }}
         </div>
-        <p>{{ project.description|truncatewords:30 }}</p>
+        <p class="card-description">{{ project.description|truncatewords:30 }}</p>
         <a href="{% url 'portfolio:project_detail' project.slug %}" class="btn btn-outline">Read more</a>
     </article>
     {% empty %}
-    <p>No projects yet.</p>
+    <p class="no-projects">No projects yet.</p>
     {% endfor %}
 </div>
 {% endblock %}

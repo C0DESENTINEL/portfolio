@@ -1,3 +1,4 @@
+# portfolio/models.py
 from django.db import models
 from django.utils.text import slugify
 import markdown
@@ -32,6 +33,7 @@ class ProjectPage(models.Model):
     project = models.ForeignKey(Project, related_name='pages', on_delete=models.CASCADE)
     title = models.CharField(max_length=200, verbose_name="Pagina Titel")
     slug = models.SlugField(verbose_name="Pagina Slug")
+    # Verwijder EasyMDEField en gebruik standaard TextField
     content_markdown = models.TextField(help_text="Schrijf hier je content in Markdown", verbose_name="Content (Markdown)")
     content_html = models.TextField(editable=False, verbose_name="Content (HTML)")
     order = models.IntegerField(default=0, verbose_name="Volgorde")

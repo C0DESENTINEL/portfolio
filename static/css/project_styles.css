@@ -1,0 +1,81 @@
+/* --- Navigatie --- */
+article nav {
+    margin-bottom: 2rem;
+}
+article nav a {
+    color: var(--text-muted);
+    text-decoration: none; /* Optioneel: voeg hover effecten toe */
+}
+article nav a:hover {
+    text-decoration: underline;
+}
+
+/* --- Header & Metadata --- */
+article h1 {
+    margin-bottom: 0.5rem;
+}
+article p.meta-info {
+    color: var(--text-muted);
+    font-size: 0.875rem;
+    margin-bottom: 1rem;
+}
+
+/* --- Featured Image --- */
+article img.featured-image {
+    width: 100%; /* Responsief */
+    height: auto;
+    border-radius: var(--radius);
+    margin-bottom: 1.5rem;
+    display: block; /* Verwijdert onderaan witruimte bij afbeeldingen */
+}
+
+/* --- Buttons Container --- */
+.article-actions {
+    margin-top: 1.5rem;
+    display: flex;
+    gap: 1rem; /* Ruimte tussen knoppen */
+    flex-wrap: wrap;
+}
+
+/* --- Tags --- */
+.article-tags {
+    margin-top: 1.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.tag-badge {
+    background: var(--bg-tertiary);
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.875rem;
+    color: var(--text-color); /* Zorg dat dit een variabele is in je base.css */
+}
+
+/* --- Divider --- */
+.content-divider {
+    margin: 2rem 0;
+    border: none;
+    border-top: 1px solid var(--border);
+}
+
+/* --- Pagina Sectie --- */
+.project-pages-section h2 {
+    margin-bottom: 1rem;
+}
+.project-pages-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.project-pages-list li {
+    margin-bottom: 0.5rem;
+}
+.project-pages-list a {
+    color: var(--link-color); /* Zorg dat dit een variabele is */
+    text-decoration: none;
+}
+.project-pages-list a:hover {
+    text-decoration: underline;
+}
