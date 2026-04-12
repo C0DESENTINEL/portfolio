@@ -1,12 +1,12 @@
 {% extends 'base.html' %}
 
 {% block title %}Projects — Erik Walther{% endblock %}
-{% block meta_description %}Bekijk mijn projecten en experimenten. Django, Python, web security en meer.{% endblock %}
+{% block meta_description %}View my projects and experiments. Django, Python, web security and more.{% endblock %}
 
 {% block content %}
-<h1>Projects</h1>
-<p class="intro-text">Selected work and experiments.</p>
-
+<div class="title-row">
+    <h1 class="title">My projects</h1>
+</div>
 <div class="projects-grid">
     {% for project in projects %}
     <article class="card">

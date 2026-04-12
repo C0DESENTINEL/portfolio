@@ -1,15 +1,15 @@
 :root {
-    --bg-primary: #0f0f11;
-    --bg-secondary: #1a1a1e;
-    --bg-tertiary: #252529;
-    --text-primary: #e4e4e7;
-    --text-secondary: #a1a1aa;
-    --text-muted: #9a9aa3;
+    --bg-primary: #0f172a;
+    --bg-secondary: #1e293b;
+    --bg-tertiary: #334155;
+    --text-primary: #f1f5f9;
+    --text-secondary: #cbd5e1;
+    --text-muted: #94a3b8;
     --accent: #60a5fa;
     --accent-hover: #3b82f6;
-    --border: #27272a;
+    --border: #334155;
     --radius: 8px;
-    --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+    --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.4);
     --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     --font-mono: 'SF Mono', 'Fira Code', 'Consolas', monospace;
 }
@@ -32,17 +32,22 @@ code { font-family: var(--font-mono); font-size: 0.9em; background: var(--bg-ter
 pre { background: var(--bg-secondary); padding: 1rem; border-radius: var(--radius); overflow-x: auto; margin-bottom: 1rem; border: 1px solid var(--border); }
 pre code { background: transparent; padding: 0; }
 
-.container { max-width: 800px; margin: 0 auto; padding: 0 1.5rem; }
-.container-wide { max-width: 1100px; }
+.container { max-width: 886px; margin: 0 auto; padding: 0 1.5rem; margin-left: auto; margin-right: auto;}
+.container-wide { max-width: 1024px; margin-left: auto; margin-right: auto;}
 
-header { background: var(--bg-secondary); border-bottom: 1px solid var(--border); padding: 1rem 0; position: sticky; top: 0; z-index: 100; }
-footer { background: var(--bg-secondary); border-top: 1px solid var(--border); padding: 2rem 0; margin-top: 4rem; text-align: center; color: var(--text-muted); font-size: 0.875rem; }
+header { background: var(--bg-secondary); border-bottom: 1px solid var(--border); border-radius: var(--radius); padding: 1rem 0; position: sticky; top: 0; z-index: 100; }
+.header-center {display: flex; justify-content: center; padding: 1rem 0;}
+footer { background: var(--bg-secondary); border-top: 1px solid var(--border); border-radius: var(--radius); padding: 2rem 0; margin-top: 4rem; text-align: center; color: var(--text-muted); font-size: 0.875rem; }
 
-.nav { display: flex; justify-content: space-between; align-items: center; }
-.nav-brand { font-weight: 600; font-size: 1.125rem; }
+.nav {display: flex; align-items: center; justify-content: space-between; padding: 1rem 0;}
+.nav-brand {display: flex; align-items: center; gap: 0.75rem; text-decoration: none; color: inherit; font-weight: bold; font-size: 1.25rem;}
+.nav-brand img {max-width: 40px; height: auto; display: block;}
 .nav-links { display: flex; gap: 2rem; list-style: none; }
 .nav-links a { color: var(--text-secondary); font-size: 0.9375rem; }
 .nav-links a:hover { color: var(--text-primary); }
+
+.title-row {justify-content: center; display: flex; align-items: center; background: var(--bg-secondary); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem; margin-bottom: 1.5rem; margin-top: 1.5rem; transition: transform 0.2s ease, box-shadow 0.2s ease;}
+.title {display: block; text-align: center; width: 100%; margin: 0;}
 
 .card { background: var(--bg-secondary); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem; margin-bottom: 1.5rem; transition: transform 0.2s ease, box-shadow 0.2s ease; }
 .card:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
@@ -64,9 +69,199 @@ footer { background: var(--bg-secondary); border-top: 1px solid var(--border); p
 .skip-link { position: absolute; left: -9999px; }
 .skip-link:focus { left: 0; top: 0; background: var(--accent); color: white; padding: 0.5rem; z-index: 1000; }
 
+/* Footer Basis */
+.footer {
+    background-color: var(--bg-secondary);
+    border-top: 1px solid var(--border);
+    padding: 2rem 0;
+    margin-top: 4rem;
+    font-size: 0.875rem;
+    color: var(--text-muted);
+}
+
+.footer-content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+/* Contact Info Container */
+.contact-info {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem; /* Ruimte tussen Email en Mastodon */
+    flex-wrap: wrap;
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+
+.separator {
+    position: relative;
+    padding-left: 1.5rem;
+}
+
+.separator::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 1px;
+    height: 1.2em;
+    background-color: var(--border);
+}
+
+.label {
+    font-weight: 500;
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+}
+
+/* Link styling binnen footer */
+.contact-info a,
+.copyright a {
+    color: var(--text-secondary);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 2px;
+    transition: color 0.2s ease, text-decoration-color 0.2s ease;
+}
+
+.contact-info a:hover,
+.copyright a:hover {
+    color: var(--accent);
+    text-decoration-color: var(--accent);
+}
+
+.copyright {
+    text-align: right;
+    line-height: 1.5;
+}
+
+/* --- Navigatie --- */
+article nav {
+    margin-bottom: 2rem;
+}
+article nav a {
+    color: var(--text-muted);
+    text-decoration: none; /* Optioneel: voeg hover effecten toe */
+}
+article nav a:hover {
+    text-decoration: underline;
+}
+
+/* --- Header & Metadata --- */
+article h1 {
+    margin-bottom: 0.5rem;
+}
+article p.meta-info {
+    color: var(--text-muted);
+    font-size: 0.875rem;
+    margin-bottom: 1rem;
+}
+
+/* --- Featured Image --- */
+article img.featured-image {
+    width: 100%; /* Responsief */
+    height: auto;
+    border-radius: var(--radius);
+    margin-bottom: 1.5rem;
+    display: block; /* Verwijdert onderaan witruimte bij afbeeldingen */
+}
+
+/* --- Buttons Container --- */
+.article-actions {
+    margin-top: 1.5rem;
+    display: flex;
+    gap: 1rem; /* Ruimte tussen knoppen */
+    flex-wrap: wrap;
+}
+
+/* --- Tags --- */
+.article-tags {
+    margin-top: 1.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.tag-badge {
+    background: var(--bg-tertiary);
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.875rem;
+    color: var(--text-color); /* Zorg dat dit een variabele is in je base.css */
+}
+
+/* --- Divider --- */
+.content-divider {
+    margin: 2rem 0;
+    border: none;
+    border-top: 1px solid var(--border);
+}
+
+/* --- Pagina Sectie --- */
+.project-pages-section h2 {
+    margin-bottom: 1rem;
+}
+.project-pages-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.project-pages-list li {
+    margin-bottom: 0.5rem;
+}
+.project-pages-list a {
+    color: var(--link-color); /* Zorg dat dit een variabele is */
+    text-decoration: none;
+}
+.project-pages-list a:hover {
+    text-decoration: underline;
+}
+
+
+
+/* Responsive aanpassingen */
+@media (max-width: 768px) {
+    .footer-content {
+        flex-direction: column;
+        text-align: center;
+        gap: 1rem;
+    }
+
+    .contact-info {
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+
+    /* Verwijder de verticale scheiding op mobiel */
+    .separator {
+        padding-left: 0;
+    }
+
+    .separator::before {
+        display: none;
+    }
+
+    .copyright {
+        text-align: center;
+    }
+}
+
 @media (max-width: 768px) {
     h1 { font-size: 2rem; }
     h2 { font-size: 1.5rem; }
     .nav-links { gap: 1rem; }
     .container { padding: 0 1rem; }
 }
+
+
+
