@@ -4,12 +4,14 @@
 {% block meta_description %}{{ project.description|truncatewords:150 }}{% endblock %}
 
 {% block content %}
-<article>
-    <nav>
-        <a href="/" class="nav-link">Home</a>
+<article class="markdown-content">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="/">Home</a>
+        <span class="breadcrumb-separator" aria-hidden="true">›</span>
+        <span aria-current="page">{{ project.title }}</span>
     </nav>
 
-    <h1>{{ project.title }}</h1>
+    <div class="card"><h1>{{ project.title }}</h1>
     <p class="meta-info">
         Created: {{ project.created_at|date:"d M Y" }} | Updated: {{ project.updated_at|date:"d M Y" }}
     </p>
@@ -38,11 +40,9 @@
         {% endfor %}
     </div>
     {% endif %}
-</article>
+</div></article>
 
-<hr class="content-divider">
-
-<section class="project-pages-section">
+<section class="project-pages-section card">
     <h2>Pagina's</h2>
     <ul class="project-pages-list">
         {% for page in project.pages.all %}
