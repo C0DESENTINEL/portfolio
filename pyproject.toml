@@ -9,8 +9,8 @@ dependencies = [
     "python-decouple",
     "whitenoise",
     "markdown>=3.4",
-    "bleach>=6.0",
     "Pillow>=10.0",
+    "nh3>=0.3.4",
 ]
 
 [build-system]

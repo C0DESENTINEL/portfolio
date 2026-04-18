@@ -2,7 +2,7 @@
 from django.db import models
 from django.utils.text import slugify
 import markdown
-import bleach
+import nh3
 
 class Project(models.Model):
     title = models.CharField(max_length=200, verbose_name="Titel")
@@ -55,18 +55,18 @@ class ProjectPage(models.Model):
             extensions=['fenced_code', 'codehilite', 'toc', 'tables', 'nl2br']
         )
 
-        allowed_tags = [
+        allowed_tags = {
             'p', 'br', 'strong', 'em', 'u', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6',
             'ul', 'ol', 'li', 'blockquote', 'pre', 'code', 'a', 'img', 'hr',
             'table', 'thead', 'tbody', 'tr', 'th', 'td'
-        ]
+        }
         allowed_attrs = {
-            '*': ['class', 'id'],
-            'a': ['href', 'title', 'target'],
-            'img': ['src', 'alt', 'title']
+            '*': {'class', 'id'},
+            'a': {'href', 'title', 'target'},
+            'img': {'src', 'alt', 'title'}
         }
 
-        self.content_html = bleach.clean(md, tags=allowed_tags, attributes=allowed_attrs, strip=True)
+        self.content_html = nh3.clean(md, tags=allowed_tags, attributes=allowed_attrs)
         super().save(*args, **kwargs)
 
     def __str__(self):
