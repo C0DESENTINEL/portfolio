@@ -1,6 +1,6 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="nl">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,11 +11,7 @@
     <meta name="author" content="Erik Walther">
     <meta name="robots" content="index, follow">
 
-    {% if request.path == '/' %}
-        <link rel="canonical" href="https://{{ request.get_host }}/" />
-    {% else %}
-        <link rel="canonical" href="https://{{ request.get_host }}{{ request.path }}" />
-    {% endif %}
+    <link rel="canonical" href="https://{{ request.get_host }}{{ request.path }}" />
 
     <link rel="icon" type="image/svg+xml" href="{% static 'favicon/favicon.svg' %}">
     <link rel="icon" type="image/png" sizes="32x32" href="{% static 'favicon/favicon-32.png' %}">

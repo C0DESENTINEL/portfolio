@@ -55,3 +55,34 @@
     </ul>
 </section>
 {% endblock %}
+{% block structured_data %}
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "SoftwareSourceCode",
+    "name": "{{ project.title|escapejs }}",
+    "description": "{{ project.description|escapejs }}",
+    "author": {
+        "@type": "Person",
+        "name": "Erik Walther"
+    },
+    "dateCreated": "{{ project.created_at|date:'Y-m-d' }}",
+    "dateModified": "{{ project.updated_at|date:'Y-m-d' }}",
+    "programmingLanguage": "Python",
+    "keywords": {{ project.tags|safe }},
+    "url": "https://erikwalther.eu{% url 'portfolio:project_detail' project.slug %}"
+    {% if project.github_url %},
+    "codeRepository": "{{ project.github_url|escapejs }}"
+    {% endif %}
+    {% if project.live_url %},
+    "targetProduct": {
+        "@type": "WebApplication",
+        "url": "{{ project.live_url|escapejs }}"
+    }
+    {% endif %}
+    {% if project.featured_image %},
+    "image": "https://erikwalther.eu{{ project.featured_image.url }}"
+    {% endif %}
+}
+</script>
+{% endblock %}
