@@ -2,6 +2,8 @@ from django.http import HttpResponse
 from django.views.decorators.cache import cache_page
 from django.shortcuts import render, get_object_or_404
 from django.contrib.sitemaps.views import sitemap
+from django.urls import reverse
+from django.utils import timezone
 from .models import Project, ProjectPage
 
 # =============================================================================
@@ -42,13 +44,16 @@ def project_page(request, project_slug, page_slug):
 
 @cache_page(60 * 60 * 24 * 7)
 def robots_txt(request):
-    robots = """
-User-agent: *
-Allow: /
+    # Dynamische sitemap URL voor domein-onafhankelijkheid
+    sitemap_url = request.build_absolute_uri('/sitemap.xml')
 
-Sitemap: https://erikwalther.eu/sitemap.xml
-    """.strip()
-    return HttpResponse(robots, content_type='text/plain')
+    lines = [
+        "User-agent: *",
+        "Allow: /",
+        "Disallow: /admin/",
+        f"Sitemap: {sitemap_url}",
+    ]
+    return HttpResponse("\n".join(lines), content_type="text/plain")
 
 class StaticSitemap:
     changefreq = 'monthly'
@@ -58,8 +63,12 @@ class StaticSitemap:
         return ['portfolio:project_list']
 
     def location(self, item):
-        from django.urls import reverse
         return reverse(item)
+
+    def lastmod(self, obj):
+        # Gebruik de datum van het meest recente project als proxy voor homepagina update
+        latest_project = Project.objects.order_by('-updated_at').first()
+        return latest_project.updated_at if latest_project else timezone.now()
 
 class ProjectSitemap:
     changefreq = 'weekly'
