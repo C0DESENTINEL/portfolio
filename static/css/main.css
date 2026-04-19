@@ -140,6 +140,10 @@ header {
     transition: min-height 0.3s ease;
     will-change: min-height;
 }
+.header-center {
+    display: flex;
+    justify-content: center;
+}
 
 .nav {
     display: flex;

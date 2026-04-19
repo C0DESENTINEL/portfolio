@@ -1,12 +1,12 @@
 {% extends 'base.html' %}
 
-{% block title %}Projects — Erik Walther{% endblock %}
-{% block meta_description %}View my projects and experiments. Django, Python, web security and more.{% endblock %}
+{% block title %}Erik Walther: Full-stack development, Tor relay maintenance and studies from Boot.dev and Hack The Box.{% endblock %}
+{% block meta_description %}Explore Erik Walther's portfolio. Full-stack development, web security, Tor relay maintenance and studies from Boot.dev and Hack The Box.{% endblock %}
 
 {% block content %}
-<!--<div class="header-center card">
-    <h1 class="card-title">My projects</h1>
-</div>-->
+<div class="header-center card">
+    <h1 class="card-title">Building Private & Secure Solutions</h1>
+</div>
 <div class="projects-grid">
     {% for project in projects %}
     <article class="card">
@@ -16,7 +16,7 @@
         <div class="card-meta">
             {{ project.created_at|date:"d M Y" }}
         </div>
-        <p class="card-description">{{ project.description|truncatewords:30 }}</p>
+        <p class="card-description">{{ project.description|truncatewords:250 }}</p>
         <a href="{% url 'portfolio:project_detail' project.slug %}" class="btn btn-outline">Read more</a>
     </article>
     {% empty %}
