@@ -2,6 +2,7 @@ from django.http import HttpResponse
 from django.views.decorators.cache import cache_page
 from django.shortcuts import render, get_object_or_404
 from django.contrib.sitemaps.views import sitemap
+from django.contrib.sitemaps import Sitemap
 from django.urls import reverse
 from django.utils import timezone
 from .models import Project, ProjectPage
@@ -42,7 +43,6 @@ def project_page(request, project_slug, page_slug):
 # SEO VIEWS
 # =============================================================================
 
-@cache_page(60 * 60 * 24 * 7)
 def robots_txt(request):
     # Dynamische sitemap URL voor domein-onafhankelijkheid
     sitemap_url = request.build_absolute_uri('/sitemap.xml')
@@ -55,7 +55,7 @@ def robots_txt(request):
     ]
     return HttpResponse("\n".join(lines), content_type="text/plain")
 
-class StaticSitemap:
+class StaticSitemap(Sitemap):
     changefreq = 'monthly'
     priority = 0.8
 
@@ -70,31 +70,39 @@ class StaticSitemap:
         latest_project = Project.objects.order_by('-updated_at').first()
         return latest_project.updated_at if latest_project else timezone.now()
 
-class ProjectSitemap:
+class ProjectSitemap(Sitemap):
     changefreq = 'weekly'
     priority = 0.9
 
     def items(self):
         return Project.objects.all()
 
+    def location(self, obj):
+        return reverse('portfolio:project_detail', kwargs={'project_slug': obj.slug})
+
     def lastmod(self, obj):
         return obj.updated_at
 
-class ProjectPageSitemap:
+class ProjectPageSitemap(Sitemap):
     changefreq = 'monthly'
     priority = 0.7
 
     def items(self):
         return ProjectPage.objects.select_related('project')
 
+    def location(self, obj):
+        return reverse('portfolio:project_page', kwargs={
+            'project_slug': obj.project.slug,
+            'page_slug': obj.slug
+        })
+
     def lastmod(self, obj):
         return obj.updated_at
 
-@cache_page(60 * 60 * 24)
 def sitemap_xml_view(request):
     sitemaps = {
-        'static': StaticSitemap,
-        'projects': ProjectSitemap,
-        'project_pages': ProjectPageSitemap,
+        'static': StaticSitemap(),
+        'projects': ProjectSitemap(),
+        'project_pages': ProjectPageSitemap(),
     }
     return sitemap(request, sitemaps)
