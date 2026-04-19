@@ -17,23 +17,20 @@
     <link rel="icon" type="image/png" sizes="32x32" href="{% static 'favicon/favicon-32.png' %}">
     <link rel="icon" type="image/png" sizes="16x16" href="{% static 'favicon/favicon-16.png' %}">
     <link rel="apple-touch-icon" sizes="180x180" href="{% static 'favicon/apple-touch-icon.png' %}">
-    
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://erikwalther.eu">
-    <meta property="og:title" content="{% block og_title %}Erik Walther: Building Private & Secure Solutions{% endblock %}">
-    <meta property="og:description" content="{% block og_description %}Full-stack development, Tor relay maintenance and studies from Boot.dev and Hack The Box.{% endblock %}">
-    <meta property="og:locale" content="en_US">
-    <meta property="og:site_name" content="Erik Walther">
+
     <meta name="fediverse:creator" content="@breqoftoren@social.linux.pizza">
 
-    <meta property="og:title" content="{{ page_title|default:'Building Private & Secure Solutions' }}">
-    <meta property="og:description" content="{{ meta_description|default:'Full-stack development, Tor relay maintenance and studies from Boot.dev and Hack The Box.' }}">
-    <meta property="og:url" content="{{ request.build_absolute_uri }}">
     <meta property="og:type" content="website">
-
+    <meta property="og:title" content="{% block og_title %}Erik Walther: Building Private & Secure Solutions{% endblock %}">
+    <meta property="og:description" content="{% block og_description %}Full-stack development with focus on SEO en security and privacy, Tor relay maintenance and reports on studies from Boot.dev and Hack The Box.{% endblock %}">
+    <meta property="og:image" content="{{ og_image_url|default:'https://erikwalther.eu/static/images/card-banner.svg' }}">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:site_name" content="Erik Walther">
+    <meta property="og:url" content="{{ request.build_absolute_uri }}">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="{{ page_title|default:'Building Private & Secure Solutions' }}">
-    <meta name="twitter:description" content="{{ meta_description|default:'Full-stack development, Tor relay maintenance and studies from Boot.dev and Hack The Box.' }}">
+    <meta name="twitter:description" content="{{ meta_description|default:'Full-stack development with focus on SEO en security and privacy, Tor relay maintenance and reports on studies from Boot.dev and Hack The Box.' }}">
+    <meta name="twitter:image" content="{{ og_image_url|default:'https://erikwalther.eu/static/images/card-banner.svg' }}">
 
     <link href="{% static 'css/main.css' %}" rel="stylesheet">
 

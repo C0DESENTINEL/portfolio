@@ -24,12 +24,13 @@
 
     {% if project.github_url or project.live_url %}
     <div class="article-actions">
-        {% if project.github_url %}
-        <a href="{{ project.github_url }}" class="btn btn-outline" target="_blank" rel="noopener noreferrer">GitHub</a>
-        {% endif %}
         {% if project.live_url %}
-        <a href="{{ project.live_url }}" class="btn" target="_blank" rel="noopener noreferrer">Live Demo</a>
+        <a href="{{ project.live_url }}" class="btn" target="_blank" rel="noopener noreferrer">{{ project.title }}</a>
         {% endif %}
+        {% if project.github_url %}
+        <a href="{{ project.github_url }}" class="btn" target="_blank" rel="noopener noreferrer">GitHub</a>
+        {% endif %}
+
     </div>
     {% endif %}
 
@@ -43,7 +44,7 @@
 </div></article>
 
 <section class="project-pages-section card">
-    <h2>Pagina's</h2>
+    <h2>Pages</h2>
     <ul class="project-pages-list">
         {% for page in project.pages.all %}
         <li>
