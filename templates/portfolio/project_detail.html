@@ -2,7 +2,7 @@
 
 {% block title %}{{ project.title }} — Erik Walther{% endblock %}
 {% block meta_description %}{{ project.description|truncatewords:150 }}{% endblock %}
-
+{% load static %}
 {% block content %}
 <article class="markdown-content">
     <nav class="breadcrumb" aria-label="Breadcrumb">
@@ -11,37 +11,38 @@
         <span aria-current="page">{{ project.title }}</span>
     </nav>
 
-    <div class="card"><h1>{{ project.title }}</h1>
-    <p class="meta-info">
-        Created: {{ project.created_at|date:"d M Y" }} | Updated: {{ project.updated_at|date:"d M Y" }}
-    </p>
+    <div class="card">
+        <h1>{{ project.title }}</h1>
+        <p class="meta-info">
+            Created: {{ project.created_at|date:"d M Y" }} | Updated: {{ project.updated_at|date:"d M Y" }}
+        </p>
 
-    {% if project.featured_image %}
-    <img src="{{ project.featured_image.url }}" alt="{{ project.title }}" class="featured-image">
-    {% endif %}
-
-    <p>{{ project.description }}</p>
-
-    {% if project.github_url or project.live_url %}
-    <div class="article-actions">
-        {% if project.live_url %}
-        <a href="{{ project.live_url }}" class="btn" target="_blank" rel="noopener noreferrer">{{ project.title }}</a>
-        {% endif %}
-        {% if project.github_url %}
-        <a href="{{ project.github_url }}" class="btn" target="_blank" rel="noopener noreferrer">GitHub</a>
+        {% if project.featured_image %}
+        <img src="{% static project.featured_image %}" alt="{{ project.title }}" class="featured-image">
         {% endif %}
 
-    </div>
-    {% endif %}
+        <p>{{ project.description }}</p>
 
-    {% if project.tags %}
-    <div class="article-tags">
-        {% for tag in project.tags %}
-        <span class="tag-badge">{{ tag }}</span>
-        {% endfor %}
+        {% if project.github_url or project.live_url %}
+        <div class="article-actions">
+            {% if project.live_url %}
+            <a href="{{ project.live_url }}" class="btn" target="_blank" rel="noopener noreferrer">{{ project.title }}</a>
+            {% endif %}
+            {% if project.github_url %}
+            <a href="{{ project.github_url }}" class="btn" target="_blank" rel="noopener noreferrer">GitHub</a>
+            {% endif %}
+        </div>
+        {% endif %}
+
+        {% if project.tags %}
+        <div class="article-tags">
+            {% for tag in project.tags %}
+            <span class="tag-badge">{{ tag }}</span>
+            {% endfor %}
+        </div>
+        {% endif %}
     </div>
-    {% endif %}
-</div></article>
+</article>
 
 <section class="project-pages-section card">
     <h2>Pages</h2>
@@ -56,34 +57,18 @@
     </ul>
 </section>
 {% endblock %}
+
 {% block structured_data %}
 <script type="application/ld+json">
-{
+{{ project.get_schema_json|safe }}
+</script>
+<script type="application/ld+json">{
     "@context": "https://schema.org",
-    "@type": "SoftwareSourceCode",
-    "name": "{{ project.title|escapejs }}",
-    "description": "{{ project.description|escapejs }}",
-    "author": {
-        "@type": "Person",
-        "name": "Erik Walther"
-    },
-    "dateCreated": "{{ project.created_at|date:'Y-m-d' }}",
-    "dateModified": "{{ project.updated_at|date:'Y-m-d' }}",
-    "programmingLanguage": "Python",
-    "keywords": {{ project.tags|safe }},
-    "url": "https://erikwalther.eu{% url 'portfolio:project_detail' project.slug %}"
-    {% if project.github_url %},
-    "codeRepository": "{{ project.github_url|escapejs }}"
-    {% endif %}
-    {% if project.live_url %},
-    "targetProduct": {
-        "@type": "WebApplication",
-        "url": "{{ project.live_url|escapejs }}"
-    }
-    {% endif %}
-    {% if project.featured_image %},
-    "image": "https://erikwalther.eu{{ project.featured_image.url }}"
-    {% endif %}
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://erikwalther.eu/"},
+        {"@type": "ListItem", "position": 2, "name": "{{ project.title|escapejs }}"}
+    ]
 }
 </script>
 {% endblock %}

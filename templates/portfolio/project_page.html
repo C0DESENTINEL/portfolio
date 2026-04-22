@@ -34,30 +34,37 @@
 {% endblock %}
 
 {% block structured_data %}
-<script type="application/ld+json">
-{
+<script type="application/ld+json">{
     "@context": "https://schema.org",
     "@type": "CreativeWork",
-    "headline": "{{ page.title }}",
+    "headline": "{{ page.title|escapejs }}",
     "description": "{{ project.description|escapejs }}",
     "author": {
         "@type": "Person",
-        "name": "Erik Walther"
+        "name": "Erik Walther",
+        "url": "https://erikwalther.eu"
     },
-    "datePublished": "{{ project.created_at|date:'Y-m-d' }}",
+    "datePublished": "{{ page.created_at|date:'Y-m-d' }}",
     "dateModified": "{{ page.updated_at|date:'Y-m-d' }}",
     "mainEntityOfPage": {
         "@type": "WebPage",
         "@id": "https://erikwalther.eu{{ request.get_full_path }}"
     },
-    "publisher": {
-        "@type": "Person",
-        "name": "Erik Walther",
-        "logo": {
-            "@type": "ImageObject",
-            "url": "https://erikwalther.eu/static/images/logo.png"
-        }
+    "isPartOf": {
+        "@type": "{{ project.get_schema_type }}",
+        "name": "{{ project.title|escapejs }}",
+        "url": "https://erikwalther.eu{% url 'portfolio:project_detail' project.slug %}"
     }
+}
+</script>
+<script type="application/ld+json">{
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://erikwalther.eu/"},
+        {"@type": "ListItem", "position": 2, "name": "{{ project.title|escapejs }}", "item": "https://erikwalther.eu{% url 'portfolio:project_detail' project.slug %}"},
+        {"@type": "ListItem", "position": 3, "name": "{{ page.title|escapejs }}"}
+    ]
 }
 </script>
 {% endblock %}
