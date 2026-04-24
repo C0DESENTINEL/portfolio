@@ -18,7 +18,7 @@
         </p>
 
         {% if project.featured_image %}
-        <img src="{% static project.featured_image %}" alt="{{ project.title }}" class="featured-image">
+        <img src="{% static project.featured_image %}" alt="{{ project.title }}" loading="lazy" class="featured-image">
         {% endif %}
 
         <p>{{ project.description }}</p>
