@@ -542,3 +542,65 @@ fieldset.collapse-closed summary:hover {
     background: var(--admin-bg-secondary) !important;
     border-color: var(--admin-accent) !important;
 }
+.codehilite {
+    background: var(--admin-bg-secondary) !important;
+    border: 1px solid var(--admin-border) !important;
+    border-radius: var(--admin-radius) !important;
+    padding: 1rem !important;
+    margin: 1rem 0 !important;
+    overflow-x: auto !important;
+}
+
+.codehilite pre {
+    background: transparent !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: none !important;
+}
+.EasyMDEContainer .CodeMirror-cursor {
+    border-left-color: var(--admin-accent) !important; /* Gebruikt je accentkleur (#60a5fa) */
+    border-left-width: 2px !important; /* Optioneel: iets dikker maken */
+}
+
+/* Als je ook de 'blink' effect wilt aanpassen of uitschakelen */
+.EasyMDEContainer .CodeMirror-focused .CodeMirror-cursor {
+    animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+/* Sidebar verbergen in admin panel */
+#toggle-nav-sidebar, #nav-sidebar {
+display: none !important;
+}
+
+/* Zorg dat de hoofdinhoud de volledige breedte inneemt */
+#content {
+margin-left: 0 !important;
+max-width: 100% !important;
+}
+
+/* Pas eventueel de padding aan voor meer ruimte */
+.container {
+    max-width: 100% !important;
+    padding: 0 2rem !important;
+}
+.editor-preview,
+.editor-preview-side,
+.CodeMirror-merge-preview {
+    background: var(--admin-bg-secondary) !important;
+    color: var(--admin-text-secondary) !important;
+}
+
+/* Forceer alle pre/code elementen in de preview */
+.editor-preview pre,
+.editor-preview code,
+.editor-preview-side pre,
+.editor-preview-side code {
+    background: var(--admin-bg-primary) !important;
+    color: var(--text-primary) !important;
+}
+#id_project { padding-top: 1px !important; padding-bottom: 1px !important; }
