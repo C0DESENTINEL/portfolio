@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-
+{% load humanize %}
 {% block title %}{{ page.title }} — {{ project.title }}{% endblock %}
 {% block meta_description %}{{ page.content_markdown|striptags|truncatewords:150 }}{% endblock %}
 
@@ -15,8 +15,8 @@
 
     <div  class="card">
     <h1>{{ page.title }}</h1>
-    <p>
-        Updated: {{ page.updated_at|date:"d M Y" }}
+    <p class="card-meta">
+        Updated: {{ page.updated_at|naturaltime }}
     </p>
 
     <div>{{ page.content_html|safe }}</div></div>

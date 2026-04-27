@@ -5,11 +5,8 @@ from django.contrib.sitemaps.views import sitemap
 from django.contrib.sitemaps import Sitemap
 from django.urls import reverse
 from django.utils import timezone
+from datetime import date
 from .models import Project, ProjectPage
-
-# =============================================================================
-# PROJECT VIEWS
-# =============================================================================
 
 def project_list(request):
     projects = Project.objects.all()
@@ -39,12 +36,15 @@ def project_page(request, project_slug, page_slug):
         'next_page': next_page
     })
 
-# =============================================================================
-# SEO VIEWS
-# =============================================================================
+def privacy_policy(request):
+    last_updated = timezone.make_aware(
+        timezone.datetime(2026, 4, 26, 7, 0, 0)
+    )
+    return render(request, 'privacy_policy.html', {
+        'last_updated': last_updated,
+    })
 
 def robots_txt(request):
-    # Dynamische sitemap URL voor domein-onafhankelijkheid
     sitemap_url = request.build_absolute_uri('/sitemap.xml')
 
     lines = [
@@ -60,13 +60,12 @@ class StaticSitemap(Sitemap):
     priority = 0.8
 
     def items(self):
-        return ['portfolio:project_list']
+        return ['portfolio:project_list', 'portfolio:privacy_policy']
 
     def location(self, item):
         return reverse(item)
 
     def lastmod(self, obj):
-        # Gebruik de datum van het meest recente project als proxy voor homepagina update
         latest_project = Project.objects.order_by('-updated_at').first()
         return latest_project.updated_at if latest_project else timezone.now()
 

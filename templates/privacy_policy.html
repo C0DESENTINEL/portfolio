@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+{% load humanize %}
+
+{% block title %}Privacy Policy — Erik Walther{% endblock %}
+{% block meta_description %}Privacy policy for Erik Walther's website. Transparent data processing, no tracking, and full GDPR compliance.{% endblock %}
+
+{% block content %}
+<article class="markdown-content">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="/">Home</a>
+        <span class="breadcrumb-separator" aria-hidden="true">›</span>
+        <span aria-current="page">Privacy Policy</span>
+    </nav>
+
+    <div class="card">
+        <h1>Privacy Policy</h1>
+        <p class="meta-info">Effective date: {{ last_updated|naturaltime }}</p>
+
+        <p>This privacy policy describes how Erik Walther ("I", "my") handles personal data when you visit this website (https://erikwalther.eu). My approach is transparency and minimal data collection.</p>
+
+        <h2>1. Who Owns This Site?</h2>
+        <p>The website is owned and operated by <strong>Erik Walther</strong>.</p>
+
+        <h2>2. What Data Is Collected and How?</h2>
+        <p><strong>Automated Data Collection:</strong> Like most web servers, my server automatically logs certain information for security and maintenance purposes. These logs contain:</p>
+        <ul>
+            <li>Your device's IP address</li>
+            <li>The date and time of your visit</li>
+            <li>The page you requested</li>
+            <li>Your browser and operating system information (User-Agent)</li>
+            <li>The referrer URL (which site you came from)</li>
+        </ul>
+        <p>After 30 days this data is automatically removed.</p>
+        <p><strong>Cookies:</strong> This website places only one technically necessary cookie:</p>
+        <ul>
+            <li><strong>CSRF token:</strong> This cookie (<code>csrftoken</code>) is automatically set by Django to prevent cross-site request forgery attacks. It contains no personal data, expires after 1 year, and is essential for the security of the site.</li>
+        </ul>
+        <p>I do <strong>not</strong> use any analytics software (such as Google Analytics, Matomo, or Piwik) and I do not use tracking cookies.</p>
+
+        <h2>3. Legal Basis for Processing</h2>
+        <p>The legal basis for processing server logs is my <strong>legitimate interest</strong> (GDPR Article 6(1)(f)) in ensuring the security, stability, and proper functioning of the website, as well as complying with legal obligations regarding log retention for potential law enforcement investigations.</p>
+        <p>The legal basis for the CSRF cookie is strictly necessary for the performance of a contract (providing the service) and security (GDPR Article 6(1)(b) and ePrivacy Directive).</p>
+
+        <h2>4. Purpose of Collection</h2>
+        <p>The collected data is used exclusively for:</p>
+        <ul>
+            <li>Detecting and preventing security incidents (e.g., DDoS attacks, brute force attempts).</li>
+            <li>Troubleshooting technical issues and debugging errors.</li>
+            <li>Compliance with legal obligations.</li>
+        </ul>
+
+        <h2>5. Third Parties and Data Sharing</h2>
+        <p>I do not sell, rent, or share your personal data with third parties for marketing purposes.</p>
+        <p>Data may only be disclosed to third parties if:</p>
+        <ul>
+            <li>I am legally obligated to do so (e.g., by a court order or law enforcement agency).</li>
+            <li>My hosting provider requires access to logs for infrastructure maintenance (see Cross-Border Transfers below).</li>
+        </ul>
+
+        <h2>6. Cross-Border Data Transfers</h2>
+        <p>All data is processed and stored within the European Union. No data is transferred outside the EU.</p>
+
+        <h2>7. User Rights</h2>
+        <p>Under the GDPR, you have the following rights regarding your data:</p>
+        <ul>
+            <li><strong>Right to Access:</strong> You may request a copy of the server logs containing your IP address.</li>
+            <li><strong>Right to Erasure:</strong> You may request the immediate deletion of your IP address from our logs (subject to legal retention requirements).</li>
+            <li><strong>Right to Object:</strong> You may object to the processing of your data for security logging purposes, though this may limit my ability to protect the site.</li>
+            <li><strong>Right to Complain:</strong> You have the right to lodge a complaint with your local data protection authority (in the Netherlands: <a href="https://autoriteitpersoonsgegevens.nl" target="_blank" rel="noopener noreferrer">Autoriteit Persoonsgegevens</a>).</li>
+        </ul>
+        <p>To exercise these rights, please contact me using the details below.</p>
+
+        <h2>8. Changes to This Policy</h2>
+        <p>I may update this privacy policy from time to time. Changes will be published on this page with an updated "effective date". Significant changes will be communicated via my social media channels if possible.</p>
+
+        <h2>9. Contact Details</h2>
+        <p>If you have questions about this privacy policy or wish to exercise your rights, you can reach me via:</p>
+        <ul>
+            <li>
+                Email:
+                <a href="mailto:erik@erikwalther.eu" aria-label="Send email to Erik Walther">erik@erikwalther.eu</a>
+            </li>
+            <li>Mastodon: <a href="https://social.linux.pizza/@breqoftoren">@breqoftoren@social.linux.pizza</a></li>
+        </ul>
+    </div>
+</article>
+{% endblock %}

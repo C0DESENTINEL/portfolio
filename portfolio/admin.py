@@ -7,11 +7,15 @@ class ProjectAdmin(admin.ModelAdmin):
     list_filter = ('is_featured', 'created_at')
     search_fields = ('title', 'description')
     prepopulated_fields = {'slug': ('title',)}
-    readonly_fields = ('created_at', 'updated_at')
+    readonly_fields = ('description_html', 'created_at', 'updated_at')
 
     fieldsets = (
         ('Algemeen', {
             'fields': ('title', 'slug', 'description')
+        }),
+        ('HTML preview', {
+            'fields': ('description_html',),
+            'classes': ('collapse',)
         }),
         ('Media & Links', {
             'fields': ('featured_image', 'github_url', 'live_url')
@@ -38,7 +42,11 @@ class ProjectPageAdmin(admin.ModelAdmin):
             'fields': ('project', 'title', 'slug', 'order')
         }),
         ('Content', {
-            'fields': ('content_markdown', 'content_html')
+            'fields': ('content_markdown',)
+        }),
+        ('HTML Preview', {
+            'fields': ('content_html',),
+            'classes': ('collapse',)
         }),
         ('Metadata', {
             'fields': ('created_at', 'updated_at'),

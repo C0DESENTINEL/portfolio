@@ -1,11 +1,11 @@
 {% extends 'base.html' %}
-
-{% block title %}Erik Walther: Full-stack development, Tor relay maintenance and studies from Boot.dev and Hack The Box.{% endblock %}
-{% block meta_description %}Explore Erik Walther's portfolio. Full-stack development, web security, Tor relay maintenance and studies from Boot.dev and Hack The Box.{% endblock %}
+{% load humanize %}
+{% block title %}Explore Erik Walther's portfolio.{% endblock %}
+{% block meta_description %}Full-stack development, web security, Tor relay maintenance and studies from Boot.dev and Hack The Box.{% endblock %}
 
 {% block content %}
 <div class="header-center card">
-    <h1 class="card-title">Building Private & Secure Solutions</h1>
+    <h1 class="card-title">Programming, Hacking & Privacy</h1>
 </div>
 <div class="projects-grid">
     {% for project in projects %}
@@ -14,9 +14,9 @@
             <a href="{% url 'portfolio:project_detail' project.slug %}">{{ project.title }}</a>
         </h2>
         <div class="card-meta">
-            {{ project.created_at|date:"d M Y" }}
+            {{ project.created_at|naturaltime }}
         </div>
-        <p class="card-description">{{ project.description|truncatewords:250 }}</p>
+        <div class="card-description markdown-content">{{ project.description_html|safe }}</div>
         <a href="{% url 'portfolio:project_detail' project.slug %}" class="btn btn-outline">Explore {{ project.title }}</a>
     </article>
     {% empty %}

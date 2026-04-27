@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-
+{% load humanize %}
 {% block title %}{{ project.title }} — Erik Walther{% endblock %}
 {% block meta_description %}{{ project.description|truncatewords:150 }}{% endblock %}
 {% load static %}
@@ -14,14 +14,14 @@
     <div class="card">
         <h1>{{ project.title }}</h1>
         <p class="meta-info">
-            Created: {{ project.created_at|date:"d M Y" }} | Updated: {{ project.updated_at|date:"d M Y" }}
+            Created: {{ project.created_at|naturaltime }} | Updated: {{ project.updated_at|naturaltime }}
         </p>
 
         {% if project.featured_image %}
         <img src="{% static project.featured_image %}" alt="{{ project.title }}" loading="lazy" class="featured-image">
         {% endif %}
 
-        <p>{{ project.description }}</p>
+        <div class="markdown-content">{{ project.description_html|safe }}</div>
 
         {% if project.github_url or project.live_url %}
         <div class="article-actions">
@@ -34,13 +34,13 @@
         </div>
         {% endif %}
 
-        {% if project.tags %}
+ <!--       {% if project.tags %}
         <div class="article-tags">
             {% for tag in project.tags %}
             <span class="tag-badge">{{ tag }}</span>
             {% endfor %}
         </div>
-        {% endif %}
+        {% endif %} -->
     </div>
 </article>
 

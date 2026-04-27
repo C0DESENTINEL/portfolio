@@ -18,27 +18,27 @@ FEATURED_IMAGE_CHOICES = [
 ]
 
 class Project(models.Model):
-    title = models.CharField(max_length=200, verbose_name="Titel")
+    title = models.CharField(max_length=200, verbose_name="Title")
     slug = models.SlugField(unique=True, blank=True, verbose_name="Slug")
-    description = models.TextField(verbose_name="Korte beschrijving")
+    description = models.TextField(verbose_name="Description (Markdown)")
+    description_html = models.TextField(editable=False, verbose_name="Description (HTML)", default="", blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
-    # VERANDERD: Van FileField naar CharField
     featured_image = models.CharField(
         max_length=200,
         blank=True,
         null=True,
         choices=FEATURED_IMAGE_CHOICES,
         default='',
-        verbose_name="Featured afbeelding",
-        help_text="Kies een afbeelding uit de lijst (pad is relatief aan static/images/)."
+        verbose_name="Featured image",
+        help_text="Choose an image from the list (path is relative to static/images/)."
     )
 
     github_url = models.URLField(blank=True, verbose_name="GitHub URL")
     live_url = models.URLField(blank=True, verbose_name="Live URL")
     tags = models.JSONField(default=list, blank=True, verbose_name="Tags")
-    is_featured = models.BooleanField(default=False, verbose_name="Uitgelicht?")
+    is_featured = models.BooleanField(default=False, verbose_name="Featured?")
 
     class Meta:
         ordering = ['-created_at']
@@ -48,12 +48,29 @@ class Project(models.Model):
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = slugify(self.title)
+        if self.description:
+            md = markdown.markdown(
+                self.description,
+                extensions=['fenced_code', 'codehilite', 'toc', 'tables', 'nl2br']
+            )
+            allowed_tags = {
+                'p', 'br', 'strong', 'em', 'u', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6',
+                'ul', 'ol', 'li', 'blockquote', 'pre', 'code', 'a', 'img', 'hr',
+                'table', 'thead', 'tbody', 'tr', 'th', 'td'
+            }
+            allowed_attrs = {
+                '*': {'class', 'id'},
+                'a': {'href', 'title', 'target'},
+                'img': {'src', 'alt', 'title'}
+            }
+            self.description_html = nh3.clean(md, tags=allowed_tags, attributes=allowed_attrs)
+        else:
+            self.description_html = ""
         super().save(*args, **kwargs)
 
     def __str__(self):
         return self.title
 
-    # --- SCHEMA.ORG METHODEN (Blijven gelijk) ---
     def _detect_category(self):
         title_lower = self.title.lower()
         tags_lower = [t.lower() for t in self.tags] if isinstance(self.tags, list) else []
@@ -106,20 +123,10 @@ class Project(models.Model):
         elif category == 'software':
             base_data.update({ "applicationCategory": "Web Application", "operatingSystem": "Linux", "softwareVersion": "1.0" })
 
-#        if self.github_url:
-#            base_data["codeRepository"] = self.github_url
         if self.live_url:
             base_data["url"] = self.live_url
-#            if category != 'software':
-#                base_data["serviceUrl"] = self.live_url
 
-        # AFBEELDING LOGICA AANGEPAST
         if self.featured_image:
-            # We gebruiken een placeholder URL of een directe link,
-            # maar voor JSON-LD is een absolute URL nodig.
-            # Omdat we de hash niet kennen (die komt pas na collectstatic),
-            # gebruiken we de ruwe URL. Django zal dit in de template oplossen.
-            # Voor SEO is de ruwe URL vaak acceptabel, of je gebruikt een vaste URL.
             base_data["image"] = {
                 "@type": "ImageObject",
                 "url": f"https://erikwalther.eu/static/{self.featured_image}",
@@ -132,7 +139,6 @@ class Project(models.Model):
         return json.dumps(self.get_schema_data(), ensure_ascii=False)
 
 class ProjectPage(models.Model):
-    # ... (blijft exact hetzelfde) ...
     project = models.ForeignKey(Project, related_name='pages', on_delete=models.CASCADE)
     title = models.CharField(max_length=200, verbose_name="Pagina Titel")
     slug = models.SlugField(verbose_name="Pagina Slug")

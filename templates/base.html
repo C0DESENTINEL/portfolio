@@ -56,7 +56,7 @@
     <header>
         <div class="container header-center">
             <a href="/" class="nav-brand" aria-label="Terug naar home">
-                <img src="{% static 'images/logo.svg' %}" alt="Erik Walther Portfolio" loading="lazy" width="40" height="40">
+                <img src="{% static 'images/logo.svg' %}" alt="Erik Walther Portfolio" width="40" height="40">
                 <span class="brand-text">Erik Walther</span>
             </a>
         </div>
@@ -69,20 +69,25 @@
     <footer>
         <div class="container">
             <div class="footer-content">
-                <!-- Copyright & Licentie -->
-                <div class="copyright">
+                 <div class="copyright">
                     <p>&copy; {% now "Y" %} Erik Walther. Built with Django.</p>
-                    <p class="license">
-                        <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="license noopener noreferrer" aria-label="Creative Commons BY-SA 4.0">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16">
-                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-7.5v-3h2v3h3v2h-3v3h-2v-3H8v-2h3z"/>
-                            </svg>
-                            CC BY-SA 4.0
-                        </a>
-                    </p>
-                </div>
+                    <div class="contact-info" style="justify-content: flex-end;">
+                        <div class="contact-item">
+                            <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="license noopener noreferrer" aria-label="Creative Commons BY-SA 4.0">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16">
+                                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-7.5v-3h2v3h3v2h-3v3h-2v-3H8v-2h3z"/>
+                                </svg>
+                                CC BY-SA 4.0
+                            </a>
+                        </div>
 
-                <!-- Sociale Links -->
+                        <div class="separator"></div>
+
+                        <div class="contact-item">
+                            <a href="{% url 'portfolio:privacy_policy' %}" aria-label="Privacy Policy">Privacy Policy</a>
+                        </div>
+                    </div>
+                </div>
                 <div class="contact-info">
                     <div class="contact-item">
                         <a rel="me noopener noreferrer" href="https://social.linux.pizza/@breqoftoren" target="_blank" aria-label="Mastodon Profile">

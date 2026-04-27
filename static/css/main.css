@@ -52,9 +52,6 @@ body {
     word-spacing: 0.01em;
 }
 
-/* =========================================
- *  2. UTILITIES & LAYOUT
- *  ========================================= */
 .container { max-width: var(--container-max); margin: 0 auto; padding: 0 1.5rem; }
 .container-wide { max-width: var(--container-wide-max); margin: 0 auto; }
 
@@ -71,9 +68,6 @@ body {
     border-radius: var(--radius);
 }
 
-/* =========================================
- *  3. TYPOGRAPHY & LINKS
- *  ========================================= */
 a {
     color: var(--accent);
     text-decoration: underline;
@@ -124,10 +118,6 @@ pre {
 }
 pre code { background: transparent; padding: 0; }
 
-/* =========================================
- *  4. COMPONENTS
- *  ========================================= */
-/* Header & Nav */
 header {
     background: var(--bg-secondary);
     border-bottom: 1px solid var(--border);
@@ -186,7 +176,6 @@ header {
 }
 .nav-links a.active { font-weight: 600; }
 
-/* Breadcrumb */
 .breadcrumb {
     position: sticky;
     top: calc(var(--header-height));
@@ -210,7 +199,6 @@ header {
 }
 .breadcrumb-separator { margin: 0 0.5rem; color: var(--border); }
 
-/* Cards & Content */
 .card {
     background: var(--bg-secondary);
     border: 1px solid var(--border);
@@ -241,7 +229,6 @@ header {
     font-style: italic;
 }
 
-/* Buttons */
 .btn {
     display: inline-block;
     padding: 0.625rem 1.25rem;
@@ -263,7 +250,6 @@ header {
 }
 .btn-outline:hover { color: var(--accent); border-color: var(--accent); }
 
-/* Project Specifics */
 .project-meta {
     color: var(--text-muted);
     font-size: 0.875rem;
@@ -311,7 +297,6 @@ header {
     margin: 2rem 0;
 }
 
-/* Pagination */
 .page-navigation {
     display: flex;
     justify-content: space-between;
@@ -376,10 +361,9 @@ header {
 }
 .project-pages-list a:hover { color: var(--accent); }
 
-/* Tables */
 .markdown-content table {
     width: auto;
-    min-width: 300px; /* Pas deze waarde aan naar behoefte */
+    min-width: 300px;
     margin: 1rem 0;
     border-collapse: collapse;
     margin-bottom: 1.5rem;
@@ -394,6 +378,7 @@ header {
     padding: 0.75rem 1rem;
     text-align: left;
     border-bottom: 1px solid var(--border);
+    overflow-wrap: break-word;
 }
 .markdown-content th {
     background-color: var(--bg-tertiary);
@@ -407,7 +392,6 @@ header {
 .markdown-content tr:last-child td { border-bottom: none; }
 .markdown-content tr:hover { background-color: rgba(96, 165, 250, 0.05); }
 
-/* Footer */
 footer {
     background: var(--bg-secondary);
     border-top: 1px solid var(--border);
@@ -486,7 +470,7 @@ footer {
 .separator {
     position: relative;
     padding-left: 1rem;
-    margin-left: 0.25rem;
+    margin-left: 0.75rem;
 }
 .separator::before {
     content: "";
@@ -499,9 +483,6 @@ footer {
     background-color: var(--border);
 }
 
-/* =========================================
- *  5. RESPONSIVE DESIGN
- *  ========================================= */
 @media (max-width: 768px) {
     header {
         padding: 0.75rem 0;
@@ -568,9 +549,14 @@ footer {
         display: block;
         overflow-x: auto;
         -webkit-overflow-scrolling: touch;
-        white-space: nowrap;
     }
     .markdown-content table::-webkit-scrollbar { height: 6px; }
     .markdown-content table::-webkit-scrollbar-track { background: var(--bg-primary); }
     .markdown-content table::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+}
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+    }
 }
