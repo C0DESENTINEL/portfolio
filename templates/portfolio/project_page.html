@@ -1,10 +1,11 @@
 {% extends 'base.html' %}
 {% load humanize %}
+
 {% block title %}{{ page.title }} — {{ project.title }}{% endblock %}
 {% block meta_description %}{{ page.content_markdown|striptags|truncatewords:150 }}{% endblock %}
 
 {% block content %}
-<article class="markdown-content">
+<article class="card">
     <nav class="breadcrumb" aria-label="Breadcrumb">
         <a href="/">Home</a>
         <span class="breadcrumb-separator" aria-hidden="true">›</span>
@@ -13,28 +14,36 @@
         <span aria-current="page">{{ page.title }}</span>
     </nav>
 
-    <div  class="card">
     <h1>{{ page.title }}</h1>
     <p class="card-meta">
         Updated: {{ page.updated_at|naturaltime }}
     </p>
 
-    <div>{{ page.content_html|safe }}</div></div>
+    <div class="content">
+        {{ page.content_html|safe }}
+    </div>
 </article>
 
-<nav>
+<nav class="actions" style="justify-content: space-between; margin-top: 2rem;">
     {% if previous_page %}
-    <a href="{% url 'portfolio:project_page' project.slug previous_page.slug %}" class="btn btn-outline">← {{ previous_page.title }}</a>
+    <a href="{% url 'portfolio:project_page' project.slug previous_page.slug %}" class="btn btn-outline">
+        ← {{ previous_page.title }}
+    </a>
+    {% else %}
+    <span></span>
     {% endif %}
 
     {% if next_page %}
-    <a href="{% url 'portfolio:project_page' project.slug next_page.slug %}" class="btn btn-outline">{{ next_page.title }} →</a>
+    <a href="{% url 'portfolio:project_page' project.slug next_page.slug %}" class="btn btn-outline">
+        {{ next_page.title }} →
+    </a>
     {% endif %}
 </nav>
 {% endblock %}
 
 {% block structured_data %}
-<script type="application/ld+json">{
+<script type="application/ld+json">
+{
     "@context": "https://schema.org",
     "@type": "CreativeWork",
     "headline": "{{ page.title|escapejs }}",
@@ -51,19 +60,20 @@
         "@id": "https://erikwalther.eu{{ request.get_full_path }}"
     },
     "isPartOf": {
-        "@type": "{{ project.get_schema_type }}",
+        "@type": "{{ project.get_schema_type|default:'Project' }}",
         "name": "{{ project.title|escapejs }}",
         "url": "https://erikwalther.eu{% url 'portfolio:project_detail' project.slug %}"
     }
 }
 </script>
-<script type="application/ld+json">{
+<script type="application/ld+json">
+{
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     "itemListElement": [
         {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://erikwalther.eu/"},
         {"@type": "ListItem", "position": 2, "name": "{{ project.title|escapejs }}", "item": "https://erikwalther.eu{% url 'portfolio:project_detail' project.slug %}"},
-        {"@type": "ListItem", "position": 3, "name": "{{ page.title|escapejs }}"}
+        {"@type": "ListItem", "position": 3, "name": "{{ page.title|escapejs }}", "item": "https://erikwalther.eu{{ request.get_full_path }}"}
     ]
 }
 </script>

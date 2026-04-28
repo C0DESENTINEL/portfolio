@@ -2,15 +2,22 @@
 {% load static %}
 
 {% block extrastyle %}
-{{ block.super }}
-<link rel="stylesheet" href="{% static 'css/pygments-monokai.css' %}">
-<link rel="stylesheet" href="{% static 'css/admin.css' %}">
+    {{ block.super }}
+    <!-- Importeer de geoptimaliseerde admin CSS (bevat ook variabelen) -->
+    <link rel="stylesheet" href="{% static 'css/admin.css' %}">
+
+    <!-- Optioneel: Als je nog specifieke Pygments styling nodig hebt voor code blokken in de admin,
+         zorg dat die in admin.css staat of importeer hier een apart bestand als dat bestaat.
+         In onze nieuwe setup is syntax highlighting vaak al in admin.css of main.css opgelost.
+         Als je een apart pygments bestand wilt houden:
+         <link rel="stylesheet" href="{% static 'css/pygments-monokai.css' %}">
+    -->
 {% endblock %}
 
 {% block branding %}
-<h1 id="site-name">
-    <a href="{% url 'admin:index' %}">
-        Erik Walther — Admin
-    </a>
-</h1>
+    <h1 id="site-name">
+        <a href="{% url 'admin:index' %}">
+            Erik Walther — Admin
+        </a>
+    </h1>
 {% endblock %}

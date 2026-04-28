@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% load humanize %}
-{% block title %}Explore Erik Walther's portfolio.{% endblock %}
+
+{% block title %}Projects — Erik Walther{% endblock %}
 {% block meta_description %}Full-stack development, web security, Tor relay maintenance and studies from Boot.dev and Hack The Box.{% endblock %}
 
 {% block content %}
@@ -16,14 +17,15 @@
         <div class="card-meta">
             {{ project.created_at|naturaltime }}
         </div>
-        <div class="card-description markdown-content">{{ project.description_html|safe }}</div>
+        <div class="card-description content">{{ project.description_html|safe }}</div>
         <a href="{% url 'portfolio:project_detail' project.slug %}" class="btn btn-outline">Explore {{ project.title }}</a>
     </article>
     {% empty %}
-    <p class="no-projects">No projects yet.</p>
+    <p class="no-projects">Geen projecten.</p>
     {% endfor %}
 </div>
 {% endblock %}
+
 {% block structured_data %}
 <script type="application/ld+json">
 {

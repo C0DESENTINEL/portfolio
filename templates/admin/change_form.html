@@ -1,0 +1,36 @@
+{% extends "admin/change_form.html" %}
+{% load static %}
+
+{% block extrastyle %}
+    {{ block.super }}
+    <!-- EasyMDE CSS wordt nu geladen via admin.css of hier expliciet als je dat prefereert -->
+    <!-- Als je EasyMDE CSS apart hebt staan: -->
+    <!-- <link rel="stylesheet" href="{% static 'css/easymde.min.css' %}"> -->
+    <!-- Maar in onze nieuwe setup staat de styling in admin.css -->
+{% endblock %}
+
+{% block admin_change_form_document_ready %}
+    {{ block.super }}
+    <script src="{% static 'js/easymde.min.js' %}"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var descTextarea = document.getElementById('id_description');
+        if (descTextarea) {
+            new EasyMDE({
+                element: descTextarea,
+                spellChecker: false,
+                autosave: { enabled: false },
+                toolbar: [
+                    'bold', 'italic', 'heading', '|',
+                    'code', 'quote', 'unordered-list', 'ordered-list', '|',
+                    'link', 'image', '|',
+                    'preview', 'side-by-side', 'fullscreen', '|',
+                    'guide'
+                ],
+                status: ['lines', 'words'],
+                placeholder: "Schrijf hier een korte beschrijving in Markdown..."
+            });
+        }
+    });
+    </script>
+{% endblock %}

@@ -1,8 +1,10 @@
 {% extends 'base.html' %}
 {% load humanize %}
+{% load static %}
+
 {% block title %}{{ project.title }} — Erik Walther{% endblock %}
 {% block meta_description %}{{ project.description|truncatewords:150 }}{% endblock %}
-{% load static %}
+
 {% block content %}
 <article class="markdown-content">
     <nav class="breadcrumb" aria-label="Breadcrumb">
@@ -18,41 +20,33 @@
         </p>
 
         {% if project.featured_image %}
-        <img src="{% static project.featured_image %}" alt="{{ project.title }}" loading="lazy" class="featured-image">
+        <img src="{% static project.featured_image %}" alt="{{ project.title }}" loading="lazy" class="project-featured-image">
         {% endif %}
 
-        <div class="markdown-content">{{ project.description_html|safe }}</div>
+        <div class="content">{{ project.description_html|safe }}</div>
 
         {% if project.github_url or project.live_url %}
-        <div class="article-actions">
+        <div class="actions">
             {% if project.live_url %}
-            <a href="{{ project.live_url }}" class="btn" target="_blank" rel="noopener noreferrer">{{ project.title }}</a>
+            <a href="{{ project.live_url }}" class="btn" target="_blank" rel="noopener noreferrer">Live Demo</a>
             {% endif %}
             {% if project.github_url %}
             <a href="{{ project.github_url }}" class="btn" target="_blank" rel="noopener noreferrer">GitHub</a>
             {% endif %}
         </div>
         {% endif %}
-
- <!--       {% if project.tags %}
-        <div class="article-tags">
-            {% for tag in project.tags %}
-            <span class="tag-badge">{{ tag }}</span>
-            {% endfor %}
-        </div>
-        {% endif %} -->
     </div>
 </article>
 
 <section class="project-pages-section card">
-    <h2>Pages</h2>
+    <h2>Pagina's</h2>
     <ul class="project-pages-list">
         {% for page in project.pages.all %}
         <li>
             <a href="{% url 'portfolio:project_page' project.slug page.slug %}">{{ page.title }}</a>
         </li>
         {% empty %}
-        <li>No pages yet.</li>
+        <li>Geen pagina's.</li>
         {% endfor %}
     </ul>
 </section>
@@ -62,12 +56,13 @@
 <script type="application/ld+json">
 {{ project.get_schema_json|safe }}
 </script>
-<script type="application/ld+json">{
+<script type="application/ld+json">
+{
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     "itemListElement": [
         {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://erikwalther.eu/"},
-        {"@type": "ListItem", "position": 2, "name": "{{ project.title|escapejs }}"}
+        {"@type": "ListItem", "position": 2, "name": "{{ project.title|escapejs }}", "item": "https://erikwalther.eu{% url 'portfolio:project_detail' project.slug %}"}
     ]
 }
 </script>

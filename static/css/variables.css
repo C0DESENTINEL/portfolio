@@ -1,0 +1,35 @@
+/* static/css/variables.css */
+:root {
+    /* Colors - Shared between Frontend & Admin */
+    --bg-primary: #0f172a;
+    --bg-secondary: #1e293b;
+    --bg-tertiary: #334155;
+    --text-primary: #f1f5f9;
+    --text-secondary: #cbd5e1;
+    --text-muted: #94a3b8;
+    --text-nav: #e2e8f0;
+    --accent: #60a5fa;
+    --accent-hover: #3b82f6;
+    --border: #334155;
+    --danger: #f87171;
+    --success: #4ade80;
+    --warning: #fbbf24;
+
+    /* Typography */
+    --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --font-mono: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+
+    /* Spacing & Layout */
+    --radius: 8px;
+    --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.4);
+    --header-height: 6.6rem;
+    --header-height-mobile: 4.25rem;
+    --container-max: 886px;
+    --container-wide-max: 1024px;
+    --sticky-offset: calc(var(--header-height) + 3rem);
+    --sticky-offset-mobile: calc(var(--header-height-mobile) + 2rem);
+
+    /* Font Sizes */
+    --fs-h1: clamp(2rem, 5vw, 2.5rem);
+    --fs-h2: clamp(1.5rem, 4vw, 2rem);
+}

@@ -32,8 +32,8 @@
     <meta name="twitter:description" content="{{ meta_description|default:'Full-stack development with focus on SEO en security and privacy, Tor relay maintenance and reports on studies from Boot.dev and Hack The Box.' }}">
     <meta name="twitter:image" content="{{ og_image_url|default:'https://erikwalther.eu/static/images/card-banner.svg' }}">
 
+    <!-- Belangrijk: main.css importeren -->
     <link href="{% static 'css/main.css' %}" rel="stylesheet">
-    <link href="{% static 'css/pygments-dracula.css' %}" rel="stylesheet">
 
     <link rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/" />
     <meta property="cc:license" content="https://creativecommons.org/licenses/by-sa/4.0/" xmlns:cc="http://creativecommons.org/ns#" />
@@ -54,6 +54,7 @@
 </head>
 <body>
     <a href="#main-content" class="skip-link">Skip to main content</a>
+
     <header>
         <div class="container header-center">
             <a href="/" class="nav-brand" aria-label="Terug naar home">
@@ -89,6 +90,7 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="contact-info">
                     <div class="contact-item">
                         <a rel="me noopener noreferrer" href="https://social.linux.pizza/@breqoftoren" target="_blank" aria-label="Mastodon Profile">
