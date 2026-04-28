@@ -5,7 +5,7 @@
 {% block meta_description %}{{ page.content_markdown|striptags|truncatewords:150 }}{% endblock %}
 
 {% block content %}
-<article class="card">
+<article class="markdown-content">
     <nav class="breadcrumb" aria-label="Breadcrumb">
         <a href="/">Home</a>
         <span class="breadcrumb-separator" aria-hidden="true">›</span>
@@ -14,13 +14,15 @@
         <span aria-current="page">{{ page.title }}</span>
     </nav>
 
-    <h1>{{ page.title }}</h1>
-    <p class="card-meta">
-        Updated: {{ page.updated_at|naturaltime }}
-    </p>
+    <div class="card">
+        <h1>{{ page.title }}</h1>
+        <p class="card-meta">
+            Updated: {{ page.updated_at|naturaltime }}
+        </p>
 
-    <div class="content">
-        {{ page.content_html|safe }}
+        <div class="content">
+            {{ page.content_html|safe }}
+        </div>
     </div>
 </article>
 

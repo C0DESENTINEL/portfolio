@@ -28,7 +28,7 @@
         {% if project.github_url or project.live_url %}
         <div class="actions">
             {% if project.live_url %}
-            <a href="{{ project.live_url }}" class="btn" target="_blank" rel="noopener noreferrer">Live Demo</a>
+            <a href="{{ project.live_url }}" class="btn" target="_blank" rel="noopener noreferrer">{{ project.title }}</a>
             {% endif %}
             {% if project.github_url %}
             <a href="{{ project.github_url }}" class="btn" target="_blank" rel="noopener noreferrer">GitHub</a>
