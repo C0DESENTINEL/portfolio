@@ -18,13 +18,13 @@ STORAGES = {
 
 SECRET_KEY = config('SECRET_KEY')
 DEBUG = False
-ALLOWED_HOSTS = ['erikwalther.eu', 'www.erikwalther.eu', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['erikwalther.eu', 'www.erikwalther.eu', 'hcb724zual6bxrg2jncfask2kwxlq3pnnjd2s2iq2vspwedz5b7sjqid.onion']
 
 # Security settings
-SECURE_SSL_REDIRECT = True
+SECURE_SSL_REDIRECT =  True
 SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
-CSRF_TRUSTED_ORIGINS = ['https://erikwalther.eu', 'https://www.erikwalther.eu']
+CSRF_TRUSTED_ORIGINS = ['https://erikwalther.eu', 'https://www.erikwalther.eu', 'http://hcb724zual6bxrg2jncfask2kwxlq3pnnjd2s2iq2vspwedz5b7sjqid.onion']
 SECURE_BROWSER_XSS_FILTER = True
 SECURE_CONTENT_TYPE_NOSNIFF = True
 X_FRAME_OPTIONS = 'DENY'
