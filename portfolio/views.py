@@ -6,7 +6,17 @@ from django.contrib.sitemaps import Sitemap
 from django.urls import reverse
 from django.utils import timezone
 from datetime import date
-from .models import Project, ProjectPage
+from .models import Project, ProjectPage, SiteIntro
+
+def homepage(request):
+    intro = SiteIntro.objects.first()
+
+    recent_pages = ProjectPage.objects.select_related('project').order_by('-created_at')[:4]
+
+    return render(request, 'portfolio/homepage.html', {
+        'intro': intro,
+        'recent_pages': recent_pages,
+    })
 
 def project_list(request):
     projects = Project.objects.all()
@@ -60,7 +70,7 @@ class StaticSitemap(Sitemap):
     priority = 0.8
 
     def items(self):
-        return ['portfolio:project_list', 'portfolio:privacy_policy']
+        return ['portfolio:homepage', 'portfolio:project_list', 'portfolio:privacy_policy']
 
     def location(self, item):
         return reverse(item)

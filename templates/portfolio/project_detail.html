@@ -54,16 +54,28 @@
 
 {% block structured_data %}
 <script type="application/ld+json">
-{{ project.get_schema_json|safe }}
-</script>
-<script type="application/ld+json">
 {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    "itemListElement": [
-        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://erikwalther.eu/"},
-        {"@type": "ListItem", "position": 2, "name": "{{ project.title|escapejs }}", "item": "https://erikwalther.eu{% url 'portfolio:project_detail' project.slug %}"}
-    ]
+  "@context": "https://schema.org",
+  "@graph": [
+    {{ project.get_schema_json|safe }},
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://erikwalther.eu/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "{{ project.title|escapejs }}",
+          "item": "https://erikwalther.eu{% url 'portfolio:project_detail' project.slug %}"
+        }
+      ]
+    }
+  ]
 }
 </script>
 {% endblock %}

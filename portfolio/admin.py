@@ -1,5 +1,16 @@
 from django.contrib import admin
-from .models import Project, ProjectPage
+from .models import Project, ProjectPage, SiteIntro
+
+@admin.register(SiteIntro)
+class SiteIntroAdmin(admin.ModelAdmin):
+    change_form_template = 'admin/portfolio/siteintro/change_form.html'
+
+    def has_add_permission(self, request):
+        # Maximaal één intro-record
+        return SiteIntro.objects.count() == 0
+
+    def has_delete_permission(self, request, obj=None):
+        return False
 
 @admin.register(Project)
 class ProjectAdmin(admin.ModelAdmin):

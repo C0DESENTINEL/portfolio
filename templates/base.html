@@ -4,53 +4,90 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
 
+    <!-- SEO -->
     <title>{% block title %}Erik Walther — Software Developer{% endblock %}</title>
-    <meta name="description" content="{% block meta_description %}Full stack development, web security, Tor relay maintenance, and studies from Boot.dev and Hack The Box.{% endblock %}">
-    <meta name="keywords" content="{% block meta_keywords %}django, python, software developer, web security, Tor relay, boot.dev, Hack The Box{% endblock %}">
+    <meta name="description" content="{% block meta_description %}Full-stack development, web security, Tor relay maintenance, and studies from Boot.dev and Hack The Box.{% endblock %}">
+    <meta name="keywords" content="{% block meta_keywords %}django, python, full-stack developer, web security, Tor relay, boot.dev, Hack The Box{% endblock %}">
     <meta name="author" content="Erik Walther">
     <meta name="robots" content="index, follow">
-
     <link rel="canonical" href="https://{{ request.get_host }}{{ request.path }}" />
 
+    <!-- Favicons -->
     <link rel="icon" type="image/svg+xml" href="{% static 'favicon/favicon.svg' %}">
     <link rel="icon" type="image/png" sizes="32x32" href="{% static 'favicon/favicon-32.png' %}">
     <link rel="icon" type="image/png" sizes="16x16" href="{% static 'favicon/favicon-16.png' %}">
     <link rel="apple-touch-icon" sizes="180x180" href="{% static 'favicon/apple-touch-icon.png' %}">
 
+    <!-- Social Media & Open Graph -->
     <meta name="fediverse:creator" content="@breqoftoren@social.linux.pizza">
-
     <meta property="og:type" content="website">
     <meta property="og:title" content="{% block og_title %}Erik Walther: Building Private & Secure Solutions{% endblock %}">
-    <meta property="og:description" content="{% block og_description %}Full-stack development with focus on SEO en security and privacy, Tor relay maintenance and reports on studies from Boot.dev and Hack The Box.{% endblock %}">
+    <meta property="og:description" content="{% block og_description %}Full-stack development with focus on SEO, security and privacy, Tor relay maintenance and reports on studies from Boot.dev and Hack The Box.{% endblock %}">
     <meta property="og:image" content="{{ og_image_url|default:'https://erikwalther.eu/static/images/card-banner.svg' }}">
     <meta property="og:locale" content="en_US">
     <meta property="og:site_name" content="Erik Walther">
     <meta property="og:url" content="{{ request.build_absolute_uri }}">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="{{ page_title|default:'Building Private & Secure Solutions' }}">
-    <meta name="twitter:description" content="{{ meta_description|default:'Full-stack development with focus on SEO en security and privacy, Tor relay maintenance and reports on studies from Boot.dev and Hack The Box.' }}">
+    <meta name="twitter:description" content="{{ meta_description|default:'Full-stack development with focus on SEO, security and privacy, Tor relay maintenance and reports on studies from Boot.dev and Hack The Box.' }}">
     <meta name="twitter:image" content="{{ og_image_url|default:'https://erikwalther.eu/static/images/card-banner.svg' }}">
 
-    <!-- Belangrijk: main.css importeren -->
+    <link rel="dns-prefetch" href="//social.linux.pizza">
+    <link rel="dns-prefetch" href="//github.com">
+    <link rel="dns-prefetch" href="//www.boot.dev">
+    <link rel="dns-prefetch" href="//profile.hackthebox.com">
+
+    <!-- Stylesheets -->
     <link href="{% static 'css/main.css' %}" rel="stylesheet">
 
-    <link rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/" />
+    <!-- License -->
+    <link rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/">
     <meta property="cc:license" content="https://creativecommons.org/licenses/by-sa/4.0/" xmlns:cc="http://creativecommons.org/ns#" />
 
+    <!-- Structured Data (JSON-LD) - Consolidated in head for faster indexing -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "WebSite",
-      "url": "https://erikwalther.eu/",
-      "copyrightHolder": {
-        "@type": "Person",
-        "name": "Erik Walther"
-      },
-      "license": "https://creativecommons.org/licenses/by-sa/4.0/"
+      "@graph": [
+        {
+          "@type": "WebSite",
+          "@id": "https://erikwalther.eu/#website",
+          "url": "https://erikwalther.eu/",
+          "name": "Erik Walther",
+          "description": "Portfolio and blog of Erik Walther",
+          "publisher": {
+            "@id": "https://erikwalther.eu/#person"
+          },
+          "potentialAction": {
+            "@type": "SearchAction",
+            "target": "https://erikwalther.eu/search?q={search_term_string}",
+            "query-input": "required name=search_term_string"
+          }
+        },
+        {
+          "@type": "Person",
+          "@id": "https://erikwalther.eu/#person",
+          "name": "Erik Walther",
+          "url": "https://erikwalther.eu/",
+          "sameAs": [
+            "https://social.linux.pizza/@breqoftoren",
+            "https://github.com/C0DESENTINEL",
+            "https://www.boot.dev/u/codesentinel",
+            "https://profile.hackthebox.com/profile/019d8771-65b1-71da-906b-67a9af709fb5"
+          ],
+          "jobTitle": "Full-stack Developer",
+          "worksFor": {
+            "@type": "Organization",
+            "name": "Self-employed"
+          }
+        }
+      ]
     }
     </script>
 
+    {% block extra_head %}{% endblock %}
 </head>
 <body>
     <a href="#main-content" class="skip-link">Skip to main content</a>
@@ -144,7 +181,7 @@
         "@type": "Person",
         "name": "Erik Walther",
         "url": "https://erikwalther.eu",
-        "jobTitle": "Software Developer"
+        "jobTitle": "Full-stack Developer"
     }
     </script>
 

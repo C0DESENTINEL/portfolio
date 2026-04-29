@@ -267,6 +267,11 @@ header {
 .content tr:hover { background-color: rgba(96, 165, 250, 0.05); }
 .content th:last-child, .content td:last-child { border-right: none; }
 
+.homepage-intro .content table {
+    margin-left: auto; /* Dwingt de tabel naar rechts */
+    margin-right: 1px;
+}
+
 /* =========================================
  * 6. FOOTER
  * ========================================= */
@@ -314,6 +319,18 @@ footer {
     .nav-brand { font-size: 1.1rem; }
     .nav-links { gap: 1rem; font-size: 0.85rem; }
     .breadcrumb { top: calc(var(--header-height-mobile) + 0rem); padding: 0.25rem 0; font-size: 0.8rem; white-space: nowrap; overflow-x: auto; }
+    .content table {
+        display: block;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .content th,
+    .content td {
+        word-break: break-word;
+        overflow-wrap: break-word;
+        hyphens: auto;
+    }
     @media (max-width: 360px) { .breadcrumb-separator { display: none; } .breadcrumb { white-space: normal; } }
     .container { padding: 0 1rem; }
     h1 { font-size: 2rem; } h2 { font-size: 1.5rem; }
@@ -358,3 +375,49 @@ footer {
 .codehilite .gh, .codehilite .gu { color: #b794f4 !important; font-weight: 600; }
 .codehilite .gd { color: #fc8181 !important; background-color: rgba(252, 129, 129, 0.15) !important; }
 .codehilite .gi { color: #68d391 !important; background-color: rgba(104, 211, 145, 0.15) !important; }
+
+/* Homepage Page Grid */
+/*.page-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin: 1.5rem 0;
+}*/
+
+.homepage-pages h2 {
+    margin-bottom: 1.5rem;
+}
+
+/* Responsive aanpassing */
+@media (max-width: 768px) {
+    .page-grid { grid-template-columns: 1fr; }
+    .actions .btn,
+    .homepage-pages .btn {
+        width: auto;
+        text-align: center;
+        margin-bottom: 0.5rem;
+    }
+
+    .actions .btn:last-child,
+    .homepage-pages .btn:last-child {
+        margin-bottom: 0;
+    }
+
+    /* 2. Tables: restore right border on mobile */
+    .content table {
+        display: block;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch; /* smooth scroll on iOS */
+        border: 1px solid var(--border);
+    }
+
+    .content th,
+    .content td {
+        border-right: 1px solid var(--border) !important;
+    }
+
+    .content th:last-child,
+    .content td:last-child {
+        border-right: 1px solid var(--border) !important;
+    }
+}

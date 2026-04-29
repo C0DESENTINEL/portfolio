@@ -1,0 +1,74 @@
+{% extends "admin/change_form.html" %}
+{% load static %}
+
+{% block extrastyle %}
+{{ block.super }}
+<link rel="stylesheet" href="{% static 'css/easymde.min.css' %}">
+<link rel="stylesheet" href="{% static 'css/admin.css' %}">
+<style>
+    .EasyMDEContainer { max-width: 100% !important; }
+    .EasyMDEContainer .editor-toolbar {
+        background: var(--admin-bg-tertiary) !important;
+        border-color: var(--admin-border) !important;
+    }
+    .EasyMDEContainer .CodeMirror {
+        background: var(--admin-bg-primary) !important;
+        color: var(--admin-text-primary) !important;
+        border-color: var(--admin-border) !important;
+        min-height: 20rem !important;
+        font-family: var(--font-mono) !important;
+        font-size: 0.95rem !important;
+        line-height: 1.6 !important;
+    }
+    .EasyMDEContainer .editor-preview {
+        background: var(--admin-bg-secondary) !important;
+        color: var(--admin-text-secondary) !important;
+    }
+    .EasyMDEContainer .editor-statusbar {
+        background: var(--admin-bg-tertiary) !important;
+        color: var(--admin-text-muted) !important;
+    }
+    .EasyMDEContainer .cm-header { color: var(--admin-accent) !important; }
+    .EasyMDEContainer .cm-link { color: var(--admin-accent) !important; }
+    .EasyMDEContainer .cm-url { color: var(--admin-accent-hover) !important; }
+    .EasyMDEContainer .cm-quote { color: var(--admin-text-muted) !important; }
+    .EasyMDEContainer .cm-keyword { color: #c792ea !important; }
+    .EasyMDEContainer .cm-string { color: #c3e88d !important; }
+    .EasyMDEContainer .cm-comment { color: var(--admin-text-muted) !important; }
+    .EasyMDEContainer .cm-tag { color: #f07178 !important; }
+    .EasyMDEContainer .cm-operator { color: #89ddff !important; }
+    .EasyMDEContainer .editor-toolbar button { color: var(--admin-text-secondary) !important; }
+    .EasyMDEContainer .editor-toolbar button:hover,
+    .EasyMDEContainer .editor-toolbar button.active {
+        background: var(--admin-bg-secondary) !important;
+        color: var(--admin-accent) !important;
+    }
+    .EasyMDEContainer .editor-toolbar .separator { border-color: var(--admin-border) !important; }
+</style>
+{% endblock %}
+
+{% block admin_change_form_document_ready %}
+{{ block.super }}
+<script src="{% static 'js/easymde.min.js' %}"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    var textarea = document.getElementById('id_intro_markdown');
+    if (textarea) {
+        new EasyMDE({
+            element: textarea,
+            spellChecker: false,
+            autosave: { enabled: false },
+            toolbar: [
+                'bold', 'italic', 'heading', '|',
+                'code', 'quote', 'unordered-list', 'ordered-list', '|',
+                'link', 'image', '|',
+                'preview', 'side-by-side', 'fullscreen', '|',
+                'guide'
+            ],
+            status: ['lines', 'words'],
+            placeholder: "Schrijf hier je introductie in Markdown..."
+        });
+    }
+});
+</script>
+{% endblock %}

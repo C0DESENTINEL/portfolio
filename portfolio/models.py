@@ -7,6 +7,47 @@ import nh3
 import json
 import os
 
+class SiteIntro(models.Model):
+    intro_markdown = models.TextField(
+        verbose_name="Introduction (Markdown)",
+        help_text="Appears at the top of the homepage. Write in Markdown."
+    )
+    intro_html = models.TextField(
+        editable=False,
+        verbose_name="Introduction (HTML)",
+        default="",
+        blank=True
+    )
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        verbose_name = "Site Introduction"
+        verbose_name_plural = "Site Introduction"
+
+    def save(self, *args, **kwargs):
+        if self.intro_markdown:
+            md = markdown.markdown(
+                self.intro_markdown,
+                extensions=['fenced_code', 'codehilite', 'toc', 'tables', 'nl2br']
+            )
+            allowed_tags = {
+                'p', 'br', 'strong', 'em', 'u', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6',
+                'ul', 'ol', 'li', 'blockquote', 'pre', 'code', 'a', 'img', 'hr',
+                'table', 'thead', 'tbody', 'tr', 'th', 'td', 'span', 'div'
+            }
+            allowed_attrs = {
+                '*': {'class', 'id'},
+                'a': {'href', 'title', 'target'},
+                'img': {'src', 'alt', 'title'}
+            }
+            self.intro_html = nh3.clean(md, tags=allowed_tags, attributes=allowed_attrs)
+        else:
+            self.intro_html = ""
+        super().save(*args, **kwargs)
+
+    def __str__(self):
+        return f"Site Introductie (laatst bijgewerkt: {self.updated_at.strftime('%Y-%m-%d %H:%M')})"
+
 # Definieer de beschikbare afbeeldingen (pas deze lijst aan naar gelang je bestanden)
 FEATURED_IMAGE_CHOICES = [
     ('', '— Geen afbeelding —'),

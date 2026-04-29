@@ -29,29 +29,34 @@
 {% block structured_data %}
 <script type="application/ld+json">
 {
-    "@context": "https://schema.org",
-    "@type": "CollectionPage",
-    "name": "Projects — Erik Walther",
-    "description": "View my projects and experiments. Django, Python, web security and more.",
-    "url": "https://erikwalther.eu{{ request.get_full_path }}",
-    "author": {
-        "@type": "Person",
-        "name": "Erik Walther"
-    },
-    "mainEntity": {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "CollectionPage",
+      "@id": "https://erikwalther.eu/projects/#page",
+      "url": "https://erikwalther.eu/projects/",
+      "name": "Projects — Erik Walther",
+      "description": "View my projects and experiments. Django, Python, web security and more.",
+      "isPartOf": { "@id": "https://erikwalther.eu/#website" },
+      "author": { "@id": "https://erikwalther.eu/#person" },
+      "mainEntity": {
         "@type": "ItemList",
+        "@id": "https://erikwalther.eu/projects/#projects-list",
         "numberOfItems": {{ projects|length }},
         "itemListElement": [
-            {% for project in projects %}
-            {
-                "@type": "ListItem",
-                "position": {{ forloop.counter }},
-                "url": "https://erikwalther.eu{% url 'portfolio:project_detail' project.slug %}",
-                "name": "{{ project.title|escapejs }}"
-            }{% if not forloop.last %},{% endif %}
-            {% endfor %}
+          {% for project in projects %}
+          {
+            "@type": "ListItem",
+            "position": {{ forloop.counter }},
+            "url": "https://erikwalther.eu{% url 'portfolio:project_detail' project.slug %}",
+            "name": "{{ project.title|escapejs }}",
+            "description": "{{ project.description|truncatewords:30|escapejs }}"
+          }{% if not forloop.last %},{% endif %}
+          {% endfor %}
         ]
+      }
     }
+  ]
 }
 </script>
 {% endblock %}

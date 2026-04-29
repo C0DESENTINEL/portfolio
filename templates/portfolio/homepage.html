@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Erik Walther — Developer &amp; Infrastructure{% endblock %}
+
+{% block content %}
+<section class="homepage-intro">
+    {% if intro and intro.intro_html %}
+        <div class="content">
+            {{ intro.intro_html|safe }}
+        </div>
+    {% else %}
+        <div class="content">
+            <p>Welkom at erikwalther.eu.</p>
+        </div>
+    {% endif %}
+</section>
+
+<section class="homepage-pages">
+    <h2>Latest updates:</h2>
+    {% if recent_pages %}
+        <div class="page-grid">
+            {% for page in recent_pages %}
+                <article class="card">
+                     <h3 class="card-title">
+                        <a href="{% url 'portfolio:project_page' project_slug=page.project.slug page_slug=page.slug %}">
+                            {{ page.title }}
+                        </a>
+                    </h3>
+
+                    <div class="card-meta">
+                        In project: <a href="{% url 'portfolio:project_detail' project_slug=page.project.slug %}">{{ page.project.title }}</a>
+                    </div>
+
+                    {% if page.content_html %}
+                        <div class="card-description content">
+                            {{ page.content_html|safe|truncatewords_html:28 }}
+                        </div>
+                    {% endif %}
+                        <a href="{% url 'portfolio:project_page' project_slug=page.project.slug page_slug=page.slug %}" class="btn btn-outline" style="padding: 0.4rem 0.8rem; font-size: 0.9rem;">Read more →</a>
+                </article>
+            {% endfor %}
+        </div>
+
+        <div class="actions">
+            <a href="{% url 'portfolio:project_list' %}" class="btn btn-outline">View all projects →</a>
+        </div>
+    {% else %}
+        <p>No recent updates yet.</p>
+    {% endif %}
+</section>
+{% endblock %}
+
+{% block structured_data %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://erikwalther.eu/#webpage",
+      "url": "https://erikwalther.eu/",
+      "name": "Erik Walther — Developer & Infrastructure",
+      "description": "Portfolio and blog of Erik Walther: software development, security research, Tor relay maintenance, and studies from Boot.dev and Hack The Box.",
+      "isPartOf": {"@id": "https://erikwalther.eu/#website"},
+      "about": {"@id": "https://erikwalther.eu/#person"},
+      "breadcrumb": {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://erikwalther.eu/"
+          }
+        ]
+      }
+    },
+    {
+      "@type": "ItemList",
+      "@id": "https://erikwalther.eu/#recent-updates",
+      "name": "Recent Updates",
+      "description": "Latest project pages and updates from Erik Walther",
+      "itemListElement": [
+        {% for page in recent_pages %}
+        {
+          "@type": "ListItem",
+          "position": {{ forloop.counter }},
+          "url": "https://erikwalther.eu{% url 'portfolio:project_page' project_slug=page.project.slug page_slug=page.slug %}",
+          "name": "{{ page.title|escapejs }}",
+          "description": "{{ page.content_markdown|striptags|truncatewords:50|escapejs }}"
+        }{% if not forloop.last %},{% endif %}
+        {% endfor %}
+      ]
+    }
+  ]
+}
+</script>
+{% endblock %}
