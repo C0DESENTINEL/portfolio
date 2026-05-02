@@ -34,6 +34,7 @@ SECURE_HSTS_PRELOAD = True
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 USE_X_FORWARDED_HOST = True
 
+
 # Sites framework (voor sitemap)
 SITE_ID = 1
 
@@ -49,11 +50,20 @@ INSTALLED_APPS = [
     'django.contrib.redirects',
     'django.contrib.humanize',
     'django.contrib.postgres',
+    'axes',
     'portfolio',
+]
+
+AUTHENTICATION_BACKENDS = [
+    'axes.backends.AxesStandaloneBackend',
+    'django.contrib.auth.backends.ModelBackend',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'erikwalther.middleware.TrustProxyMiddleware',
+    'erikwalther.middleware.SecurityLoggingMiddleware',
+    'axes.middleware.AxesMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -103,11 +113,18 @@ AUTH_PASSWORD_VALIDATORS = [
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format': '{asctime} {levelname} {message}',
+            'style': '{',
+        },
+    },
     'handlers': {
         'file': {
             'level': 'WARNING',
             'class': 'logging.FileHandler',
             'filename': '/var/log/django/auth.log',
+            'formatter': 'verbose',
         },
     },
     'loggers': {
@@ -121,6 +138,16 @@ LOGGING = {
             'level': 'WARNING',
             'propagate': False,
         },
+        'security': {
+            'handlers': ['file'],
+            'level': 'WARNING',
+            'propagate': False,
+        },
+        'axes': {
+            'handlers': ['file'],
+            'level': 'WARNING',
+            'propagate': False,
+        },
     },
 }
 
@@ -128,3 +155,14 @@ LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_TZ = True
+
+AXES_IPWARE_META_PRECEDENCE_ORDER = ('HTTP_X_FORWARDED_FOR', 'X_FORWARDED_FOR', 'REMOTE_ADDR')
+AXES_PROXY_ORDER = ['X-Forwarded-For', 'X-Real-IP']
+AXES_PROXY_COUNT = 1
+AXES_FAILURE_LIMIT = 5
+AXES_COOLOFF_TIME = 1
+AXES_RESET_ON_SUCCESS = True
+AXES_HANDLER = 'axes.handlers.database.AxesDatabaseHandler'
+AXES_VERBOSE = True
+AXES_LOCK_OUT_BY = ["username", "ip_address"]
+AXES_LOCKOUT_TEMPLATE = '403.html'

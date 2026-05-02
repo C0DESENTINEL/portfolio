@@ -57,8 +57,15 @@
       "author": { "@id": "https://erikwalther.eu/#person" },
       "datePublished": "{{ page.created_at|date:'Y-m-d' }}",
       "dateModified": "{{ page.updated_at|date:'Y-m-d' }}",
+      {% if project_schema_type == 'LearningResource' %}
+      "provider": {
+        "@type": "Organization",
+        "name": "{% if 'Hack The Box' in project.title %}Hack The Box{% else %}Boot.dev{% endif %}",
+        "url": "{% if 'Hack The Box' in project.title %}https://www.hackthebox.com{% else %}https://www.boot.dev{% endif %}"
+      },
+      {% endif %}
       "isPartOf": {
-        "@type": "WebApplication",
+        "@type": "{{ project_schema_type }}",
         "name": "{{ project.title|escapejs }}",
         "url": "https://erikwalther.eu{% url 'portfolio:project_detail' project.slug %}"
       }

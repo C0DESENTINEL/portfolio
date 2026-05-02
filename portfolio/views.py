@@ -39,11 +39,14 @@ def project_page(request, project_slug, page_slug):
         previous_page = None
         next_page = None
 
+    project_schema_type = project.get_schema_type()
+
     return render(request, 'portfolio/project_page.html', {
         'project': project,
         'page': page,
         'previous_page': previous_page,
-        'next_page': next_page
+        'next_page': next_page,
+        'project_schema_type': project_schema_type,
     })
 
 def privacy_policy(request):
@@ -80,8 +83,8 @@ class StaticSitemap(Sitemap):
         return latest_project.updated_at if latest_project else timezone.now()
 
 class ProjectSitemap(Sitemap):
-    changefreq = 'weekly'
-    priority = 0.9
+    changefreq = 'monthly'
+    priority = 0.7
 
     def items(self):
         return Project.objects.all()
@@ -93,8 +96,8 @@ class ProjectSitemap(Sitemap):
         return obj.updated_at
 
 class ProjectPageSitemap(Sitemap):
-    changefreq = 'monthly'
-    priority = 0.7
+    changefreq = 'weekly'
+    priority = 0.9
 
     def items(self):
         return ProjectPage.objects.select_related('project')

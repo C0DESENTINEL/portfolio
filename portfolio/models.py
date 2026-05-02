@@ -37,7 +37,7 @@ class SiteIntro(models.Model):
             }
             allowed_attrs = {
                 '*': {'class', 'id'},
-                'a': {'href', 'title', 'target'},
+                'a': {'href', 'title', 'target', 'aria-label'},
                 'img': {'src', 'alt', 'title'}
             }
             self.intro_html = nh3.clean(md, tags=allowed_tags, attributes=allowed_attrs)
@@ -101,7 +101,7 @@ class Project(models.Model):
             }
             allowed_attrs = {
                 '*': {'class', 'id'},
-                'a': {'href', 'title', 'target'},
+                'a': {'href', 'title', 'target', 'aria-label'},
                 'img': {'src', 'alt', 'title'}
             }
             self.description_html = nh3.clean(md, tags=allowed_tags, attributes=allowed_attrs)
@@ -200,7 +200,7 @@ class ProjectPage(models.Model):
             self.slug = slugify(self.title)
         md = markdown.markdown(self.content_markdown, extensions=['fenced_code', 'codehilite', 'toc', 'tables', 'nl2br'])
         allowed_tags = {'p', 'br', 'strong', 'em', 'u', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'ul', 'ol', 'li', 'blockquote', 'pre', 'code', 'a', 'img', 'hr', 'table', 'thead', 'tbody', 'tr', 'th', 'td', 'span', 'div'}
-        allowed_attrs = {'*': {'class', 'id'}, 'a': {'href', 'title', 'target'}, 'img': {'src', 'alt', 'title'}}
+        allowed_attrs = {'*': {'class', 'id'}, 'a': {'href', 'title', 'target', 'aria-label'}, 'img': {'src', 'alt', 'title'}}
         self.content_html = nh3.clean(md, tags=allowed_tags, attributes=allowed_attrs)
         super().save(*args, **kwargs)
 
