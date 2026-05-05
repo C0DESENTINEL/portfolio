@@ -353,17 +353,17 @@ footer {
 /* =========================================
  * 8. SYNTAX HIGHLIGHTING
  * ========================================= */
-.codehilite {
+/*.codehilite {
     background: var(--bg-secondary) !important; border: 1px solid var(--border) !important;
     border-radius: var(--radius) !important; padding: 1rem !important;
     margin-bottom: 1.5rem !important; overflow-x: auto !important; position: relative;
 }
 .codehilite pre { background: transparent !important; margin: 0 !important; padding: 0 !important; border: none !important; font-family: var(--font-mono) !important; font-size: 0.9em !important; line-height: 1.5 !important; }
 .codehilite code { background: transparent !important; padding: 0 !important; font-family: var(--font-mono) !important; font-size: 0.9em !important; color: var(--text-primary) !important; }
-.codehilite pre code { white-space: pre; word-wrap: normal; }
+.codehilite pre code { white-space: pre; word-wrap: normal; }*/
 
 /* Syntax Colors */
-.codehilite .c, .codehilite .c1, .codehilite .cm, .codehilite .cs, .codehilite .ch { color: #a0aec0 !important; font-style: italic; }
+/*.codehilite .c, .codehilite .c1, .codehilite .cm, .codehilite .cs, .codehilite .ch { color: #a0aec0 !important; font-style: italic; }
 .codehilite .s, .codehilite .s1, .codehilite .s2, .codehilite .sb, .codehilite .sc, .codehilite .sd, .codehilite .se, .codehilite .sh, .codehilite .si, .codehilite .sx, .codehilite .sr, .codehilite .ss { color: #9ae6b4 !important; }
 .codehilite .k, .codehilite .kd, .codehilite .kn, .codehilite .kp, .codehilite .kr, .codehilite .kt { color: #f687b3 !important; font-weight: 600; }
 .codehilite .nf, .codehilite .nn, .codehilite .nc, .codehilite .nd { color: #63b3ed !important; font-weight: 600; }
@@ -374,7 +374,7 @@ footer {
 .codehilite .ne { color: #fc8181 !important; font-weight: 600; }
 .codehilite .gh, .codehilite .gu { color: #b794f4 !important; font-weight: 600; }
 .codehilite .gd { color: #fc8181 !important; background-color: rgba(252, 129, 129, 0.15) !important; }
-.codehilite .gi { color: #68d391 !important; background-color: rgba(104, 211, 145, 0.15) !important; }
+.codehilite .gi { color: #68d391 !important; background-color: rgba(104, 211, 145, 0.15) !important; }*/
 
 /* Homepage Page Grid */
 /*.page-grid {
