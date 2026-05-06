@@ -362,7 +362,7 @@ a:hover { color: var(--admin-accent-hover, var(--accent-hover)) !important; }
 .EasyMDEContainer .editor-toolbar .separator { border-color: var(--admin-border, var(--border)) !important; }*/
 
 /* Cursor styling */
-/*.EasyMDEContainer .CodeMirror-cursor {
+.EasyMDEContainer .CodeMirror-cursor {
     border-left-color: var(--admin-accent, var(--accent)) !important;
     border-left-width: 2px !important;
 }
@@ -372,7 +372,7 @@ a:hover { color: var(--admin-accent-hover, var(--accent-hover)) !important; }
 @keyframes blink {
     0%, 100% { opacity: 1; }
     50% { opacity: 0; }
-}*/
+}
 
 /* Sidebar verbergen in admin panel (optioneel, zoals in origineel) */
 #toggle-nav-sidebar, #nav-sidebar { display: none !important; }
