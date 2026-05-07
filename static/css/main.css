@@ -383,10 +383,14 @@ footer {
         overflow-x: auto;
         -webkit-overflow-scrolling: touch; /* smooth scroll on iOS */
         border: 1px solid var(--border);
+        width: 100%;
+        min-width: 100%;
     }
 
     .content th,
     .content td {
+        width: 1%;
+        white-space: nowrap;
         border-right: 1px solid var(--border) !important;
     }
 

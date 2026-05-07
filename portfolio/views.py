@@ -20,9 +20,9 @@ def homepage(request):
         'projects': projects,
     })
 
-def project_list(request):
-    projects = Project.objects.all()
-    return render(request, 'portfolio/projects.html', {'projects': projects})
+# def project_list(request):
+#     projects = Project.objects.all()
+#     return render(request, 'portfolio/projects.html', {'projects': projects})
 
 def project_detail(request, project_slug):
     project = get_object_or_404(Project, slug=project_slug)
@@ -75,7 +75,7 @@ class StaticSitemap(Sitemap):
     priority = 0.8
 
     def items(self):
-        return ['portfolio:homepage', 'portfolio:project_list', 'portfolio:privacy_policy']
+        return ['portfolio:homepage', 'portfolio:privacy_policy']
 
     def location(self, item):
         return reverse(item)

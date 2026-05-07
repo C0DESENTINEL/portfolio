@@ -34,10 +34,10 @@
 
                     {% if page.content_html %}
                         <div class="card-description content">
-                            {{ page.content_html|safe|truncatewords_html:40 }}
+                            {{ page.content_html|safe|truncatewords_html:25 }}
                         </div>
                     {% endif %}
-                        <a href="{% url 'portfolio:project_page' project_slug=page.project.slug page_slug=page.slug %}" class="btn btn-outline" style="padding: 0.4rem 0.8rem; font-size: 0.9rem;">Read more</a>
+                        <a href="{% url 'portfolio:project_page' project_slug=page.project.slug page_slug=page.slug %}" class="btn btn-outline" style="padding: 0.4rem 0.8rem; font-size: 0.9rem;">Read: {{ page.title }}</a>
                 </article>
             {% endfor %}
         </div>
