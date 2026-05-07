@@ -12,10 +12,12 @@ def homepage(request):
     intro = SiteIntro.objects.first()
 
     recent_pages = ProjectPage.objects.select_related('project').order_by('-created_at')[:4]
+    projects = Project.objects.all().order_by('-updated_at')[:6]
 
     return render(request, 'portfolio/homepage.html', {
         'intro': intro,
         'recent_pages': recent_pages,
+        'projects': projects,
     })
 
 def project_list(request):
