@@ -39,14 +39,14 @@
 </article>
 
 <section class="project-pages-section card">
-    <h2>Pagina's</h2>
+    <h2>Write-ups</h2>
     <ul class="project-pages-list">
         {% for page in project.pages.all %}
         <li>
             <a href="{% url 'portfolio:project_page' project.slug page.slug %}">{{ page.title }}</a>
         </li>
         {% empty %}
-        <li>Geen pagina's.</li>
+        <li>No write-ups yet.</li>
         {% endfor %}
     </ul>
 </section>

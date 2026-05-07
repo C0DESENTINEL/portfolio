@@ -21,7 +21,7 @@
         <a href="{% url 'portfolio:project_detail' project.slug %}" class="btn btn-outline">Explore {{ project.title }}</a>
     </article>
     {% empty %}
-    <p class="no-projects">Geen projecten.</p>
+    <p class="no-projects">No projects yet.</p>
     {% endfor %}
 </div>
 {% endblock %}
