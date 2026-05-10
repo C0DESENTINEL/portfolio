@@ -5,17 +5,18 @@
 {% block meta_description %}Privacy policy for Erik Walther's website. Transparent data processing, no tracking, and full GDPR compliance.{% endblock %}
 
 {% block content %}
-<article class="content">
+<div class="breadcrumb-wrapper">
     <nav class="breadcrumb" aria-label="Breadcrumb">
         <a href="/">Home</a>
         <span class="breadcrumb-separator" aria-hidden="true">›</span>
         <span aria-current="page">Privacy Policy</span>
     </nav>
-
+</div>
+<article class="markdown-content container-wide">
     <div class="card">
         <h1>Privacy Policy</h1>
         <p class="meta">Effective date: {{ last_updated|naturaltime }}</p>
-
+        <div class="content">
         <p>This privacy policy describes how Erik Walther ("I", "my") handles personal data when you visit this website (https://erikwalther.eu). My approach is transparency and minimal data collection.</p>
 
         <h2>1. Who Owns This Site?</h2>
@@ -82,6 +83,6 @@
             </li>
             <li>Mastodon: <a href="https://social.linux.pizza/@breqoftoren">@breqoftoren@social.linux.pizza</a></li>
         </ul>
-    </div>
+    </div></div>
 </article>
 {% endblock %}

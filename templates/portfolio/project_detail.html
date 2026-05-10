@@ -1,18 +1,20 @@
 {% extends 'base.html' %}
-{% load humanize %}
 {% load static %}
-
+{% load tz %}
+{% load humanize %}
 {% block title %}{{ project.title }} — Erik Walther{% endblock %}
 {% block meta_description %}{{ project.description|truncatewords:150 }}{% endblock %}
 
 {% block content %}
-<article class="markdown-content">
+<div class="breadcrumb-wrapper">
     <nav class="breadcrumb" aria-label="Breadcrumb">
         <a href="/">Home</a>
         <span class="breadcrumb-separator" aria-hidden="true">›</span>
         <span aria-current="page">{{ project.title }}</span>
     </nav>
+</div>
 
+<article class="markdown-content container-wide">
     <div class="card">
         <h1>{{ project.title }}</h1>
         <p class="meta-info">
@@ -38,7 +40,7 @@
     </div>
 </article>
 
-<section class="project-pages-section card">
+<section class="project-pages-section card container-wide">
     <h2>Write-ups</h2>
     <ul class="project-pages-list">
         {% for page in project.pages.all %}

@@ -1,10 +1,12 @@
 {% extends "base.html" %}
 {% load static %}
+{% load tz %}
+{% load humanize %}
 
 {% block title %}Erik Walther — Developer &amp; Infrastructure{% endblock %}
 
 {% block content %}
-<section class="homepage-intro">
+<section class="homepage-intro container-wide">
     {% if intro and intro.intro_html %}
         <div class="content">
             {{ intro.intro_html|safe }}
@@ -16,7 +18,7 @@
     {% endif %}
 </section>
 
-<section class="homepage-pages">
+<section class="homepage-pages container-wide">
     <h2>Latest updates:</h2>
     {% if recent_pages %}
         <div class="page-grid">
@@ -27,9 +29,8 @@
                             {{ page.title }}
                         </a>
                     </h3>
-
                     <div class="card-meta">
-                        In project: <a href="{% url 'portfolio:project_detail' project_slug=page.project.slug %}">{{ page.project.title }}</a>
+                        In project: <a href="{% url 'portfolio:project_detail' project_slug=page.project.slug %}">{{ page.project.title }}</a> | Updated: <time datetime="{{ page.updated_at|date:'c' }}">{{ page.updated_at|naturaltime }}</time>
                     </div>
 
                     {% if page.content_html %}
@@ -37,7 +38,7 @@
                             {{ page.content_html|safe|truncatewords_html:25 }}
                         </div>
                     {% endif %}
-                        <a href="{% url 'portfolio:project_page' project_slug=page.project.slug page_slug=page.slug %}" class="btn btn-outline" style="padding: 0.4rem 0.8rem; font-size: 0.9rem;">Read: {{ page.title }}</a>
+                        <a href="{% url 'portfolio:project_page' project_slug=page.project.slug page_slug=page.slug %}" class="btn btn-outline">Read: {{ page.title }}</a>
                 </article>
             {% endfor %}
         </div>
@@ -45,7 +46,7 @@
         <p>No recent updates yet.</p>
     {% endif %}
 </section>
-<section class="homepage-pages">
+<section class="homepage-pages container-wide">
     <h2>Projects overview:</h2>
     {% if projects %}
         <div class="page-grid">
@@ -56,6 +57,9 @@
                             {{ project.title }}
                         </a>
                     </h3>
+                    <p class="card-meta">
+                        Published: <time datetime="{{ project.created_at|date:'c' }}">{{ project.created_at|naturaltime }}</time> | Updated: <time datetime="{{ project.updated_at|date:'c' }}">{{ project.updated_at|naturaltime }}</time>
+                    </p>
 
                     {% if project.description %}
                         <div class="card-description content">

@@ -1,11 +1,12 @@
 {% extends 'base.html' %}
+{% load static %}
+{% load tz %}
 {% load humanize %}
-
 {% block title %}{{ page.title }} — {{ project.title }}{% endblock %}
-{% block meta_description %}{{ page.content_markdown|striptags|truncatewords:150 }}{% endblock %}
+{% block meta_description %}{{ page.content_markdown|striptags|truncatewords:20 }}{% endblock %}
 
 {% block content %}
-<article class="markdown-content">
+<div class="breadcrumb-wrapper">
     <nav class="breadcrumb" aria-label="Breadcrumb">
         <a href="/">Home</a>
         <span class="breadcrumb-separator" aria-hidden="true">›</span>
@@ -13,7 +14,8 @@
         <span class="breadcrumb-separator" aria-hidden="true">›</span>
         <span aria-current="page">{{ page.title }}</span>
     </nav>
-
+</div>
+<article class="markdown-content container-wide">
     <div class="card">
         <h1>{{ page.title }}</h1>
         <p class="card-meta">
@@ -26,7 +28,7 @@
     </div>
 </article>
 
-<nav class="actions" style="justify-content: space-between; margin-top: 2rem;">
+<nav class="actions container-wide">
     {% if previous_page %}
     <a href="{% url 'portfolio:project_page' project.slug previous_page.slug %}" class="btn btn-outline">
         ← {{ previous_page.title }}

@@ -48,14 +48,13 @@ class SiteIntro(models.Model):
     def __str__(self):
         return f"Site Introductie (laatst bijgewerkt: {self.updated_at.strftime('%Y-%m-%d %H:%M')})"
 
-# Definieer de beschikbare afbeeldingen (pas deze lijst aan naar gelang je bestanden)
+
 FEATURED_IMAGE_CHOICES = [
     ('', '— Geen afbeelding —'),
     ('images/tor-relay.svg', 'Tor Relay'),
     ('images/hack-the-box.svg', 'Hack The Box'),
     ('images/boot-dev.svg', 'Boot.dev'),
     ('images/portfolio.svg', 'Portfolio Site'),
-    # Voeg hier nieuwe bestanden toe als je ze in static/images/ zet
 ]
 
 class Project(models.Model):
@@ -129,7 +128,7 @@ class Project(models.Model):
         mapping = {
             'study': 'LearningResource',
             'infrastructure': 'WebApplication',
-            'software': 'WebApplication',
+            'software': 'WebPage',
             'other': 'SoftwareSourceCode'
         }
         return mapping.get(category, 'SoftwareSourceCode')
@@ -142,11 +141,6 @@ class Project(models.Model):
             "@type": self.get_schema_type(),
             "name": self.title,
             "description": self.description,
-            "author": {
-                "@type": "Person",
-                "name": "Erik Walther",
-                "url": "https://erikwalther.eu"
-            },
             "datePublished": self.created_at.strftime('%Y-%m-%d'),
             "dateModified": self.updated_at.strftime('%Y-%m-%d'),
         }
