@@ -2,7 +2,7 @@
 {% load static %}
 {% load tz %}
 {% load humanize %}
-{% block title %}{{ project.title }} — Erik Walther{% endblock %}
+{% block title %}Project: {{ project.title }}{% endblock %}
 {% block meta_description %}{{ project.description|truncatewords:150 }}{% endblock %}
 
 {% block content %}

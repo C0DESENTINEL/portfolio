@@ -2,7 +2,7 @@
 {% load static %}
 {% load tz %}
 {% load humanize %}
-{% block title %}{{ page.title }} — {{ project.title }}{% endblock %}
+{% block title %}Write-up: {{ page.title }} — {{ project.title }}{% endblock %}
 {% block meta_description %}{{ page.content_markdown|striptags|truncatewords:20 }}{% endblock %}
 
 {% block content %}
