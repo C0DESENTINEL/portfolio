@@ -6,6 +6,7 @@ from django.contrib.sitemaps import Sitemap
 from django.urls import reverse
 from django.utils import timezone
 from datetime import date
+from datetime import timedelta
 from .models import Project, ProjectPage, SiteIntro
 
 def homepage(request):
@@ -58,6 +59,29 @@ def privacy_policy(request):
     return render(request, 'privacy_policy.html', {
         'last_updated': last_updated,
     })
+
+def security_txt(request):
+    """
+    Serve the security.txt file according to RFC 9116.
+    """
+    # Bereken de vervaldatum (bijv. 1 jaar vanaf nu)
+    expires = timezone.now() + timedelta(days=365)
+
+    # Formatteer de datum volgens ISO 8601 (vereist voor security.txt)
+    expires_str = expires.strftime('%Y-%m-%dT%H:%M:%S.%fZ')
+
+    content = f"""Contact: mailto:erik@erikwalther.eu
+Contact: https://social.linux.pizza/@breqoftoren
+Expires: {expires_str}
+Encryption: https://keys.openpgp.org/vks/v1/by-fingerprint/C3F1956600508973C5D3D4704E317A9633011740
+Preferred-Languages: en, nl
+Canonical: https://erikwalther.eu/.well-known/security.txt
+Policy: https://erikwalther.eu/privacy-policy/
+"""
+
+    response = HttpResponse(content, content_type="text/plain; charset=utf-8")
+
+    return response
 
 def robots_txt(request):
     sitemap_url = request.build_absolute_uri('/sitemap.xml')
