@@ -11,7 +11,7 @@ Focus areas: security hardening, privacy, and SEO.
 
 - **Backend:** Python / Django
 - **Server:** Gunicorn + reverse proxy
-- **Hosting:** Hetzner VPS (Fedora / Debian)
+- **Hosting:** Hetzner VPS (Fedora)
 - **Dependencies:** managed with [uv](https://github.com/astral-sh/uv)
 
 ---
