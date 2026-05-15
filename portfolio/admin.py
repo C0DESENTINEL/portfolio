@@ -3,7 +3,7 @@ from .models import Project, ProjectPage, SiteIntro
 
 @admin.register(SiteIntro)
 class SiteIntroAdmin(admin.ModelAdmin):
-    change_form_template = 'admin/portfolio/siteintro/change_form.html'
+  #  change_form_template = 'admin/portfolio/siteintro/change_form.html'
 
     def has_add_permission(self, request):
         # Maximaal één intro-record
