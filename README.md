@@ -36,7 +36,7 @@ static/         # CSS, images, and other static assets
 git clone https://github.com/C0DESENTINEL/portfolio.git
 cd portfolio
 uv sync
-# create a .env file with the SECRET_KEY and the DB_PASSWORD
+cp .env.example .env   # fill in SECRET_KEY, DATABASE_URL, etc.
 uv run manage.py migrate
 uv run gunicorn portfolio.wsgi
 ```
@@ -49,7 +49,7 @@ your.domain {
 }
 ```
 
-> **Note:** Never commit `.env`.
+> **Note:** Never commit `.env`. The `.env.example` file lists all required variables with placeholder values.
 ---
 
 ## Deployment
