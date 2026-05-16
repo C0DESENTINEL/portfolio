@@ -54,7 +54,7 @@ def project_page(request, project_slug, page_slug):
 
 def privacy_policy(request):
     last_updated = timezone.make_aware(
-        timezone.datetime(2026, 4, 26, 7, 0, 0)
+        timezone.datetime(2026, 5, 16, 7, 0, 0)
     )
     return render(request, 'privacy_policy.html', {
         'last_updated': last_updated,
