@@ -35,7 +35,7 @@
 
                     {% if page.content_html %}
                         <div class="card-description content">
-                            {{ page.content_html|safe|truncatewords_html:25 }}
+                            {{ page.content_html|safe|truncatewords_html:40 }}
                         </div>
                     {% endif %}
                         <a href="{% url 'portfolio:project_page' project_slug=page.project.slug page_slug=page.slug %}" class="btn btn-outline">Read: {{ page.title }}</a>
