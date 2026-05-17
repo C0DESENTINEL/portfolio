@@ -31,7 +31,7 @@
         </div>
     </article>
 
-    <nav class="actions" aria-label="Page navigation">
+    <nav class="page-navigation" aria-label="Page navigation">
         {% if previous_page %}
         <a href="{% url 'portfolio:project_page' project.slug previous_page.slug %}" class="btn btn-outline">
             ← {{ previous_page.title }}
