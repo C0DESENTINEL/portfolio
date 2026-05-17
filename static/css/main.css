@@ -115,7 +115,7 @@ strong { color: #93c5fd; }
 
 /* Inline code */
 p code, li code, blockquote code {
-    background: var(--bg-secondary);
+    background: var(--bg-primary);
     color: #93c5fd;
     padding: 0.15em 0.4em;
     border-radius: 4px;
@@ -127,7 +127,7 @@ p code, li code, blockquote code {
 
 /* Code blocks */
 pre {
-    background: var(--bg-secondary);
+    background: var(--bg-primary);
     padding: 1rem;
     border-radius: var(--radius);
     overflow-x: auto;
