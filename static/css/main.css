@@ -194,8 +194,7 @@ header {
     position: sticky;
     top: var(--header-height);
     z-index: 98;
-    background-color: var(--bg-secondary);
-    border-bottom: 1px solid var(--border);
+    background-color: var(--bg-tertiary);
     width: 100%;
 }
 
