@@ -2,11 +2,12 @@
 {% load static %}
 {% load tz %}
 {% load humanize %}
+
 {% block title %}{{ page.title }}{% endblock %}
 {% block meta_description %}{{ page.content_markdown|striptags|truncatewords:20 }}{% endblock %}
 {% block og_type %}article{% endblock %}
 
-{% block content %}
+{% block breadcrumb %}
 <div class="breadcrumb-wrapper">
     <nav class="breadcrumb" aria-label="Breadcrumb">
         <a href="/">Home</a>
@@ -16,34 +17,36 @@
         <span aria-current="page">{{ page.title }}</span>
     </nav>
 </div>
-<article class="markdown-content container-wide">
-    <div class="card">
+{% endblock %}
+
+{% block content %}
+<div class="container-wide">
+    <article class="card">
         <h1>{{ page.title }}</h1>
         <p class="card-meta">
             Updated: {{ page.updated_at|naturaltime }}
         </p>
-
         <div class="content">
             {{ page.content_html|safe }}
         </div>
-    </div>
-</article>
+    </article>
 
-<nav class="actions container-wide">
-    {% if previous_page %}
-    <a href="{% url 'portfolio:project_page' project.slug previous_page.slug %}" class="btn btn-outline">
-        ← {{ previous_page.title }}
-    </a>
-    {% else %}
-    <span></span>
-    {% endif %}
+    <nav class="actions" aria-label="Page navigation">
+        {% if previous_page %}
+        <a href="{% url 'portfolio:project_page' project.slug previous_page.slug %}" class="btn btn-outline">
+            ← {{ previous_page.title }}
+        </a>
+        {% else %}
+        <span></span>
+        {% endif %}
 
-    {% if next_page %}
-    <a href="{% url 'portfolio:project_page' project.slug next_page.slug %}" class="btn btn-outline">
-        {{ next_page.title }} →
-    </a>
-    {% endif %}
-</nav>
+        {% if next_page %}
+        <a href="{% url 'portfolio:project_page' project.slug next_page.slug %}" class="btn btn-outline">
+            {{ next_page.title }} →
+        </a>
+        {% endif %}
+    </nav>
+</div>
 {% endblock %}
 
 {% block structured_data %}
