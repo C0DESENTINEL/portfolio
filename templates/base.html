@@ -92,13 +92,15 @@
     <a href="#main-content" class="skip-link">Skip to main content</a>
 
     <header>
-        <nav class="nav" aria-label="Main navigation">
-            <a href="/" class="nav-brand" aria-label="Back to home">
-                <img src="{% static 'images/logo.svg' %}" alt="Erik Walther Portfolio" width="40" height="40">
-                <span class="brand-text">Erik Walther</span>
-            </a>
-            {% block nav_links %}{% endblock %}
-        </nav>
+        <div class="header-center">
+            <nav class="nav" aria-label="Main navigation">
+                <a href="/" class="nav-brand" aria-label="Back to home">
+                    <img src="{% static 'images/logo.svg' %}" alt="Erik Walther Portfolio" width="40" height="40">
+                    <span class="brand-text">Erik Walther</span>
+                </a>
+                {% block nav_links %}{% endblock %}
+            </nav>
+        </div>
     </header>
 
     {% block breadcrumb %}{% endblock %}
