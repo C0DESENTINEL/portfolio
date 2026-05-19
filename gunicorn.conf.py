@@ -4,13 +4,15 @@ import os
 os.environ.setdefault('TMPDIR', '/var/tmp')
 
 bind = "unix:/run/gunicorn/gunicorn.sock"
-workers = 2
-worker_class = "sync"
+workers = 3
+worker_class = "gthread"
+threads = 2  
 worker_connections = 1000
 timeout = 30
-keepalive = 2
+keepalive = 5
 max_requests = 1000
 max_requests_jitter = 50
+preload_app = True
 
 # Logging
 accesslog = "-"
